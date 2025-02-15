@@ -1,0 +1,29 @@
+.game {
+    width: 550px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* margin: 0 auto; */
+}
+
+.game_item {
+    width:50px ;
+    height: 50px;
+    border: 1px solid black;
+
+}
+
+.none {
+    display: none;
+}
+    
+.modal {
+    top: 150px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.model_heading {
+    font-size: 30px;
+}
