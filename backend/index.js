@@ -1,32 +1,49 @@
 const express = require('express');
-const cors = require('cors'); // Импортируем cors
+const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
 
 const app = express();
-
-// Разрешаем все CORS-запросы
 app.use(cors());
-
-// Или настройте CORS для конкретных доменов
-// app.use(cors({
-//     origin: 'http://your-frontend-domain.com', // Разрешить только этот домен
-//     methods: ['GET', 'POST'], // Разрешить только определённые методы
-//     credentials: true // Разрешить передачу куки и заголовков авторизации
-// }));
-
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+    },
+});
 
-// Middleware для обработки JSON
-app.use(express.json());
-
-// Хранение данных о комнатах и игроках
+// Хранение данных о комнатах
 let rooms = {};
+
+// Генерация случайного ID комнаты
+function generateRoomId() {
+    return Math.random().toString(36).substring(2, 8).toUpperCase();
+}
+
+// Логика для ИИ
+class AI {
+    constructor() {
+        this.shots = []; // Ходы ИИ
+    }
+
+    // Случайный выстрел
+    makeRandomShot() {
+        let x, y;
+        do {
+            x = Math.floor(Math.random() * 10); // Случайная координата X (0-9)
+            y = Math.floor(Math.random() * 10); // Случайная координата Y (0-9)
+        } while (this.shots.some(shot => shot.x === x && shot.y === y)); // Проверяем, чтобы выстрел не повторялся
+        this.shots.push({ x, y });
+        return { x, y };
+    }
+}
 
 // REST API для создания комнаты
 app.post('/api/rooms', (req, res) => {
     const roomId = generateRoomId();
+    const isSinglePlayer = req.body.singlePlayer || false; // Проверяем, одиночная ли это игра
+
     rooms[roomId] = {
         players: [],
         gameState: {
@@ -34,18 +51,10 @@ app.post('/api/rooms', (req, res) => {
             player2: { ships: [], shots: [] },
             currentTurn: null,
         },
+        ai: isSinglePlayer ? new AI() : null, // Добавляем ИИ, если это одиночная игра
     };
-    res.status(201).json({ roomId });
-});
 
-// REST API для получения информации о комнате
-app.get('/api/rooms/:roomId', (req, res) => {
-    const roomId = req.params.roomId;
-    if (rooms[roomId]) {
-        res.json(rooms[roomId]);
-    } else {
-        res.status(404).json({ error: 'Room not found' });
-    }
+    res.status(201).json({ roomId });
 });
 
 // WebSocket подключение
@@ -54,11 +63,15 @@ io.on('connection', (socket) => {
 
     // Подключение к комнате
     socket.on('joinRoom', (roomId) => {
-        if (rooms[roomId] && rooms[roomId].players.length < 2) {
+        if (rooms[roomId]) {
             rooms[roomId].players.push(socket.id);
             socket.join(roomId);
 
-            // Уведомляем всех игроков в комнате о подключении
+            // Если это одиночная игра, добавляем ИИ как второго игрока
+            if (rooms[roomId].ai && rooms[roomId].players.length === 1) {
+                rooms[roomId].players.push('AI'); // ИИ становится вторым игроком
+            }
+
             io.to(roomId).emit('playerJoined', rooms[roomId].players);
 
             // Если комната заполнена, начинаем игру
@@ -88,6 +101,16 @@ io.on('connection', (socket) => {
 
                 // Отправляем обновленное состояние всем игрокам в комнате
                 io.to(roomId).emit('gameStateUpdated', gameState);
+
+                // Если это одиночная игра, ИИ делает ход
+                if (rooms[roomId].ai && opponent === 'AI') {
+                    setTimeout(() => {
+                        const aiMove = rooms[roomId].ai.makeRandomShot();
+                        gameState.player1.shots.push(aiMove);
+                        gameState.currentTurn = rooms[roomId].players[0]; // Возвращаем ход игроку
+                        io.to(roomId).emit('gameStateUpdated', gameState);
+                    }, 1000); // ИИ делает ход через 1 секунду
+                }
             }
         }
     });
@@ -95,7 +118,6 @@ io.on('connection', (socket) => {
     // Отключение игрока
     socket.on('disconnect', () => {
         console.log('A user disconnected:', socket.id);
-        // Очистка комнат, если игрок отключился
         for (const roomId in rooms) {
             rooms[roomId].players = rooms[roomId].players.filter(player => player !== socket.id);
             if (rooms[roomId].players.length === 0) {
@@ -105,13 +127,8 @@ io.on('connection', (socket) => {
     });
 });
 
-// Генерация уникального ID для комнаты
-function generateRoomId() {
-    return Math.random().toString(36).substring(2, 8).toUpperCase();
-}
-
 // Запуск сервера
-const PORT = 5500;
+const PORT = 3000;
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

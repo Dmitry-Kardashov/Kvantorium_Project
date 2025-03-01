@@ -1,0 +1,26 @@
+
+1. Создание комнаты
+
+Url для создания fetch запросов
+http://localhost:3000/api/rooms
+
+Для создания одиночной комнаты необходимо указать в теле запроса 
+{"singlePlayer": true}
+
+Ответ сервера:
+{
+  "roomId": "ABC123"
+}
+
+2. Получение информации о комнате
+GET /api/rooms/:roomId 
+
+Ответ:
+{
+  "players": ["socketId1", "AI"],
+  "gameState": {
+    "player1": { "ships": [], "shots": [] },
+    "player2": { "ships": [], "shots": [] },
+    "currentTurn": null
+  }
+}
