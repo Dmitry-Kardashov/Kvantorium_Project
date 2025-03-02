@@ -14,9 +14,7 @@ body {
 }
 
 #rotateButton {
-    bottom: 10px; /* Отступ от нижней части блока */
-    left: 50%; /* Центрируем кнопку по горизонтали */
-    transform: translateX(-50%); /* Центрируем кнопку по горизонтали */
+    display: flex;
     border: none;
     background-color: white;
     padding: 5px 10px;
@@ -33,7 +31,7 @@ body {
 }
 .asd{
     background-image:url(qqq.png);
-    max-width: 100%;
+
 }
 .qq{
     max-width: 122px;
