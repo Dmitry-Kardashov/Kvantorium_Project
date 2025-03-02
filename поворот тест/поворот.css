@@ -3,7 +3,11 @@ body {
     text-align: center;
     margin: 20px;
 }
-
+.img{
+    display: flex;
+    justify-content: center;
+    max-width: 100px;
+}
 
 #rotateButton {
     display: flex;
