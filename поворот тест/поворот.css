@@ -14,7 +14,6 @@ body {
 }
 
 #rotateButton {
-    position: absolute; /* Позиционируем кнопку внутри блока */
     bottom: 10px; /* Отступ от нижней части блока */
     left: 50%; /* Центрируем кнопку по горизонтали */
     transform: translateX(-50%); /* Центрируем кнопку по горизонтали */
@@ -22,8 +21,21 @@ body {
     background-color: white;
     padding: 5px 10px;
     cursor: pointer;
+    background-color: transparent;
+    width: 22px;
+    height: 18px;
+    background-image:url(qqq.png);
 }
 
 .rotated {
     transform: rotate(180deg); /* Поворот на 180 градусов */
+    
 }
+.asd{
+    background-image:url(qqq.png);
+    max-width: 100%;
+}
+.qq{
+    max-width: 122px;
+}
+
