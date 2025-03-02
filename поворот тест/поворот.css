@@ -7,7 +7,7 @@ body {
 #box {
     width: 100px;
     height: 100px;
-    background-color: #3498db;
+    background-image: url(/img/четырехнокий\ коробль.png);
     margin: 20px auto;
     position: relative; /* Позволяет позиционировать кнопку внутри блока */
     transition: transform 0.6s; /* Анимация поворота */
