@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
         let startBtn = document.querySelector(".start-game")
         startBtn.addEventListener("click", function() {
          startGame ()
-        
+
+         let pole_text = document.querySelector(".polya")
+         pole_text.classList.remove("none")
         })
     
      })
@@ -31,10 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
         container1.append(item)
       }
     }
-    
     console.log(container)
     
-
+    
     let container2 = document.querySelector(".container")
     container2.append(container)
     container2.append(container1)
@@ -103,5 +104,9 @@ function createItem(pole, znach, y, x) {
 
 
 return item;
+
+}
+
+function validatePole() {
 
 }
