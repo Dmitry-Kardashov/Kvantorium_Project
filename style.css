@@ -67,6 +67,7 @@ button:hover {
     position: relative;
     top: 2px;
 }
+<<<<<<< HEAD
 #ship1{
  height:49px ;
 }
@@ -79,3 +80,10 @@ button:hover {
 #ship4{
     height: 184px; ;
 }
+=======
+
+/* .game {
+    display: flex;
+    justify-content: space-between;
+} */
+>>>>>>> 18bbdbb80f9cb255ca0ae42b63875531632bb3f0
