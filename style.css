@@ -67,3 +67,15 @@ button:hover {
     position: relative;
     top: 2px;
 }
+#ship1{
+ height:49px ;
+}
+#ship2{
+    height:90px ;
+}
+#ship3{
+    height: 130px;
+}
+#ship4{
+    height: 184px; ;
+}
