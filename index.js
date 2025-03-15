@@ -74,12 +74,14 @@ function createItem(pole, znach, y, x) {
 
     if(x != 0 && y != 0) {
       item.addEventListener("click", function() {
-        if (!setCol) {
+        if (setCol == 0) {
           setCol = 1  
           item.style.background = "rgb(59, 66, 82)"
         }
-        else  
-        {
+        else if( setCol == 1) {
+          setCol = 2  
+          item.style.background = "rgb(255, 0, 0)"
+        } else {
           setCol = 0
           item.style.background = "rgb(216, 222, 233)"
         }
