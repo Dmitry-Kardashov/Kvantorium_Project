@@ -67,3 +67,8 @@ button:hover {
     position: relative;
     top: 2px;
 }
+
+/* .game {
+    display: flex;
+    justify-content: space-between;
+} */
