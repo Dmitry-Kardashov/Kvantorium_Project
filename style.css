@@ -52,7 +52,7 @@ table {
       border: 3px solid rgb(94, 129, 172);
    }
 
-button {
+.start-game {
     border: none;
     border-radius: 10px;
     text-decoration: none;
@@ -61,13 +61,12 @@ button {
     box-shadow: 0 5px 0 #3b4252;
 }
 
-button:hover {
+.start-game:hover {
     background: #3b4252;
     box-shadow: none;
     position: relative;
     top: 2px;
 }
-<<<<<<< HEAD
 #ship1{
  height:49px ;
 }
@@ -80,10 +79,24 @@ button:hover {
 #ship4{
     height: 184px; ;
 }
-=======
 
-/* .game {
+.save-button {
+    width:  100px;
+    height: 50px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.polya {
     display: flex;
     justify-content: space-between;
-} */
->>>>>>> 18bbdbb80f9cb255ca0ae42b63875531632bb3f0
+} 
+
+.pole-text {
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.none {
+    display: none;
+}
