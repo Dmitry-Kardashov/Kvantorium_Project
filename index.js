@@ -12,19 +12,32 @@ document.addEventListener("DOMContentLoaded", function() {
     function startGame() {
     let container = document.createElement("div")
     container.classList.add("game")
+    let container1 = document.createElement("div")
+    container1.classList.add("game")
     // let pole = []
     let pole = createShufflePole()
     console.log(pole)
+
     for(let i=0; i<pole.length; i++) {
       for(let b=0; b<pole[i].length; b++) {
         let item = createItem(pole, pole[i][b], i, b)
         container.append(item)
       }
     }
+
+    for(let i=0; i<pole.length; i++) {
+      for(let b=0; b<pole[i].length; b++) {
+        let item = createItem(pole, pole[i][b], i, b)
+        container1.append(item)
+      }
+    }
     
     console.log(container)
     
-    document.body.append(container)
+
+    let container2 = document.querySelector(".container")
+    container2.append(container)
+    container2.append(container1)
 }
 
 function createShufflePole() {
