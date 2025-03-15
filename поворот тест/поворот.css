@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+.img{
+    display: flex;
+    justify-content: center;
+    max-width: 100px;
+}
+
+#rotateButton {
+    display: flex;
+    border: none;
+    background-color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: transparent;
+    width: 22px;
+    height: 18px;
+    background-image:url(qqq.png);
+}
+
+.rotated {
+    transform: rotate(90deg); /* Поворот на 180 градусов */
+    
+}
+.asd{
+    background-image:url(qqq.png);
+
+}
+.qq{
+    max-width: 122px;
+}
+
