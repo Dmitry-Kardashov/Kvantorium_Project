@@ -69,27 +69,35 @@ table {
 }
 #ship1{
  height:49px ;
+ display: none;
 }
 #ship2{
     height:90px ;
+    display: none;
 }
 #ship3{
     height: 130px;
+    display: none;
 }
 #ship4{
-    height: 184px; ;
+    height: 184px; 
+    display: none;
 }
 
 .save-button {
-    width:  100px;
+    border-radius: 10px;
+    color: #d8dee9;
+    background: #4c566a;
+    width: 210px;
     height: 50px;
-    display: inline-block;
+    font-size: 15px;
+    display: block;
     margin: 0 auto;
 }
 
 .polya {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 } 
 
 .pole-text {
