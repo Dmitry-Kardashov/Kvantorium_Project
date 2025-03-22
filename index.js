@@ -57,6 +57,7 @@ function createShufflePole() {
           }
           if(i == 0) {
             pole[i][b] = b
+            
           }
         }
     }
@@ -68,6 +69,12 @@ function createHeadingRow() {
 
   let item = document.createElement("div")
   item.classList.add("game_item")
+  item.textContent = isShip
+    
+  item.addEventListener("click", function() {
+    
+  }) 
+  item.style.background = "RED"
 }
 
 function createItem(pole, znach, y, x) {
@@ -93,14 +100,16 @@ function createItem(pole, znach, y, x) {
         if (setCol == 0) {
           setCol = 1  
           item.style.background = "rgb(59, 66, 82)"
+          pole[y][x] = 1
         }
-        else if( setCol == 1) {
-          setCol = 2  
-          item.style.background = "rgb(255, 0, 0)"
-        } else {
+        
+        else {
           setCol = 0
           item.style.background = "rgb(216, 222, 233)"
+          pole[y][x] = 0
+
         }
+        console.log(pole)
       })
     }
 
@@ -108,6 +117,7 @@ function createItem(pole, znach, y, x) {
 return item;
 
 }
+
 
 function validatePole() {
 
