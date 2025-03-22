@@ -91,6 +91,13 @@ return item;
 
 }
 
+let ships = {
+  1: [[],[],[],[]],
+  2: [[],[],[]],
+  3: [[],[]],
+  4: [[]],
+}
+
 // // Импортируем библиотеку socket.io-client
 // import io from 'socket.io-client';
 
@@ -134,3 +141,11 @@ return item;
 // socket.on('connect_error', (error) => {
 //     console.error('Ошибка подключения:', error);
 // });
+
+
+document.querySelectorAll(".btn").forEach( btn => {
+  btn.addEventListener("click", function() {
+    console.log(123)
+  })
+
+})

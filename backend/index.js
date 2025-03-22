@@ -25,6 +25,7 @@ function generateRoomId() {
 class AI {
     constructor() {
         this.shots = []; // Ходы ИИ
+        this.ships = []; // Корабли ИИ
     }
 
     // Случайный выстрел
@@ -36,6 +37,51 @@ class AI {
         } while (this.shots.some(shot => shot.x === x && shot.y === y)); // Проверяем, чтобы выстрел не повторялся
         this.shots.push({ x, y });
         return { x, y };
+    }
+
+    // Метод для расстановки кораблей
+    placeShips() {
+        const shipLengths = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]; // Длины кораблей
+        this.ships = []; // Очищаем массив кораблей перед расстановкой
+
+        shipLengths.forEach(length => {
+            let ship;
+            do {
+                ship = this.generateShip(length);
+            } while (this.isShipOverlapping(ship)); // Проверяем, чтобы корабли не пересекались
+            this.ships.push(ship);
+        });
+    }
+
+    // Генерация корабля заданной длины
+    generateShip(length) {
+        const isVertical = Math.random() < 0.5; // Случайно выбираем ориентацию корабля (вертикальная или горизонтальная)
+        const x = Math.floor(Math.random() * (10 - (isVertical ? 0 : length))); // Случайная координата X
+        const y = Math.floor(Math.random() * (10 - (isVertical ? length : 0))); // Случайная координата Y
+
+        const ship = [];
+        for (let i = 0; i < length; i++) {
+            if (isVertical) {
+                ship.push({ x, y: y + i });
+            } else {
+                ship.push({ x: x + i, y });
+            }
+        }
+        return ship;
+    }
+
+    // Проверка на пересечение кораблей
+    isShipOverlapping(newShip) {
+        for (const ship of this.ships) {
+            for (const cell of ship) {
+                for (const newCell of newShip) {
+                    if (newCell.x === cell.x && newCell.y === cell.y) {
+                        return true; // Корабли пересекаются
+                    }
+                }
+            }
+        }
+        return false; // Корабли не пересекаются
     }
 }
 
