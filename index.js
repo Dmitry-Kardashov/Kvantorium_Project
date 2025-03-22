@@ -1,18 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     // let input = document.querySelector(".input-count")
+    let pole = []
         let startBtn = document.querySelector(".start-game")
+        let pole_text = document.querySelector(".polya")
+        let pole_knopka = document.querySelector(".save-button")
         startBtn.addEventListener("click", function() {
          startGame()
-
-
-         let pole_text = document.querySelector(".polya")
-         pole_text.classList.remove("none")
-         let pole_knopka = document.querySelector(".save-button")
-         pole_knopka.classList.remove("none")
-         startBtn.classList.add("none")
+        pole_text.classList.remove("none")
+        pole_knopka.classList.remove("none")
+        startBtn.classList.add("none")
+         })
+        
         })
-    
-     })
         
 
     function startGame() {
@@ -37,17 +36,45 @@ document.addEventListener("DOMContentLoaded", function() {
         container1.append(item)
       }
     }
-    
+
     
     let container2 = document.querySelector(".container")
     container2.append(container)
     container2.append(container1)
-
+    
     pole.splice(0, 1)
     pole.forEach(el => el.splice(0, 1))
-
+    
     console.log(pole)
+    
+    let pole_knopka = document.querySelector(".save-button")
+    pole_knopka.addEventListener("click", function() {
+      Validate(pole)
+    })
 
+    
+}
+
+function Validate(pole){
+  let restart_text = document.querySelector(".restart_text")
+  let restart_btn = document.querySelector(".restart_button")
+  let kletki = 0
+  console.log("Начало проверки")
+  for(let i=0; i<pole.length; i++) {
+    for(let b=0; b<pole[i].length; b++) {
+      if(pole[i][b] == 1) {
+        kletki ++;
+      }
+    }
+  }
+  console.log("Количество клеток: " + kletki)
+  if(kletki != 20) {
+    console.log("Неверная растановка кораблей")
+    restart_text.classList.remove("none")
+    restart_btn.classList.remove("none")
+    console.log(restart_text, restart_btn)
+
+  }
 }
 
 function createShufflePole() {
@@ -127,6 +154,47 @@ return item;
 }
 
 
-function validatePole() {
+// function countOfNeighbors(pole, x, y) {
+//   let sum = 0;
 
-}
+//   if(x == 0  && y == 0) {
+//       sum = pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+//       return sum;
+//   }
+//   else if(x == 0  && y == 9) {
+//       sum = pole[x+1][y] + pole[x][y-1] + pole[x+1][y-1]
+//       return sum;
+//   }
+//   else if(x == 9  && y == 0) {
+//       sum = pole[x-1][y] + pole[x][y+1] + pole[x-1][y+1]
+//       return sum;
+
+//   }
+//   else if(x == 9  && y == 9) {
+//       sum = pole[x-1][y] + pole[x][y-1] + pole[x-1][y-1]
+//       return sum;
+//   }
+  
+//   if(x == 0) {
+//       sum = pole[x][y-1] + pole[x+1][y-1] + pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+//       return sum;
+//   }
+//   if(x == 9) {
+//       sum = pole[x-1][y-1] + pole[x][y-1] + pole[x-1][y] + pole[x-1][y+1] + pole[x][y+1]
+//       return sum;
+//   }
+//   if(y == 0) {
+//       sum = pole[x-1][y] + pole[x+1][y] + pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
+//       return sum;
+//   }
+//   if(y == 9) {
+//       sum= pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] + pole[x-1][y] + pole[x+1][y]
+//       return sum;
+//   }
+
+//   sum =  pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] +
+//             pole[x-1][y] +                  pole[x+1][y] +
+//             pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
+ 
+//   return sum;
+// }
