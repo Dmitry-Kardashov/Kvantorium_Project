@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
          pole_text.classList.remove("none")
          let pole_knopka = document.querySelector(".save-button")
          pole_knopka.classList.remove("none")
+         startBtn.classList.add("none")
         })
     
      })
