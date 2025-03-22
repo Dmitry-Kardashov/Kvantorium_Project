@@ -68,16 +68,16 @@ table {
     top: 2px;
 }
 #ship1{
- height:49px ;
+ width: 39px;
 }
 #ship2{
-    height:90px ;
+    width: 39px;
 }
 #ship3{
-    height: 130px;
+    height: 111px;
 }
 #ship4{
-    height: 184px; ;
+    width: 47px;
 }
 
 .save-button {
