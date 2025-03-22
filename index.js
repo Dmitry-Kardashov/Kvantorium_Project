@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // let input = document.querySelector(".input-count")
         let startBtn = document.querySelector(".start-game")
         startBtn.addEventListener("click", function() {
-         startGame ()
+         startGame()
+
 
          let pole_text = document.querySelector(".polya")
          pole_text.classList.remove("none")
@@ -35,12 +36,17 @@ document.addEventListener("DOMContentLoaded", function() {
         container1.append(item)
       }
     }
-    console.log(container)
     
     
     let container2 = document.querySelector(".container")
     container2.append(container)
     container2.append(container1)
+
+    pole.splice(0, 1)
+    pole.forEach(el => el.splice(0, 1))
+
+    console.log(pole)
+
 }
 
 function createShufflePole() {
@@ -78,6 +84,7 @@ function createHeadingRow() {
 }
 
 function createItem(pole, znach, y, x) {
+
     let setCol = 0
     let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
     // console.log(pole, znach)
@@ -100,13 +107,13 @@ function createItem(pole, znach, y, x) {
         if (setCol == 0) {
           setCol = 1  
           item.style.background = "rgb(59, 66, 82)"
-          pole[y][x] = 1
+          pole[y-1][x-1] = 1
         }
         
         else {
           setCol = 0
           item.style.background = "rgb(216, 222, 233)"
-          pole[y][x] = 0
+          pole[y-1][x-1] = 0
 
         }
         console.log(pole)
