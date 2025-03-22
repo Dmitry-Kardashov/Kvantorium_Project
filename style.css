@@ -1,3 +1,7 @@
+div {
+    cursor: inherit;
+}
+
 .game {
     width: 550px;
     display: flex;
