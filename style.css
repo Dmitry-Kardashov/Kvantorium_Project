@@ -133,8 +133,8 @@ table {
     content:❌ ;
 }
 .miss::after{
-    background-image:url(img/360_F_131653984_XfIprm8EM0rMZGrPIFCoRIv5UEESA6AX.jpg) ;
+    background-image:url(img/) ;
 }
-.hit::after{
+.hit{
     content: 🔴 ;
 }
