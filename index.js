@@ -118,6 +118,7 @@ function createItem(pole, znach, y, x) {
     // console.log(pole, znach)
     let item = document.createElement("div")
     item.classList.add("game_item")
+    item.classList.add("hit::after")
 
     
     if(znach != 0 ) {
