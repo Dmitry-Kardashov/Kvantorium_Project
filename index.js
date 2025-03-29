@@ -103,6 +103,7 @@ function createHeadingRow() {
 
   let item = document.createElement("div")
   item.classList.add("game_item")
+
   item.textContent = isShip
     
   item.addEventListener("click", function() {
@@ -118,7 +119,7 @@ function createItem(pole, znach, y, x) {
     // console.log(pole, znach)
     let item = document.createElement("div")
     item.classList.add("game_item")
-    item.classList.add("hit::after")
+    item.classList.add("hit")
 
     
     if(znach != 0 ) {
