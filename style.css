@@ -129,3 +129,12 @@ table {
 .none {
     display: none;
 }
+.kill ::after{
+    content:❌ ;
+}
+.miss::after{
+    background-image:url(img/360_F_131653984_XfIprm8EM0rMZGrPIFCoRIv5UEESA6AX.jpg) ;
+}
+.hit::after{
+    content: 🔴 ;
+}
