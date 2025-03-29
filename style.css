@@ -135,6 +135,6 @@ table {
 .miss::after{
     background-image:url(img/) ;
 }
-.hit{
+.hit::after{
     content: 🔴 ;
 }
