@@ -98,35 +98,35 @@ function createHeadingRow() {
           
 function createItem(pole, znach, y, x) {
             
-            let setCol = 0
-            let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
-            // console.log(pole, znach)
-            let item = document.createElement("div")
-            item.classList.add("game_item")
-            
-            
-            if(znach != 0 ) {
-              item.textContent = znach
-              item.classList.add("item-heading")
-              }
-              
-    if(y == 0) {
-      item.textContent = alphabet[x-1]
-      item.classList.add("item-heading")
+  let setCol = 0
+  let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
+  // console.log(pole, znach)
+  let item = document.createElement("div")
+  item.classList.add("game_item")
+
+
+  if(znach != 0 ) {
+    item.textContent = znach
+    item.classList.add("item-heading")
+  }
+
+  if(y == 0) {
+    item.textContent = alphabet[x-1]
+    item.classList.add("item-heading")
+  }
+
+  if(x != 0 && y != 0) {
+    item.addEventListener("click", function() {
+    if (setCol == 0) {
+      setCol = 1  
+      item.style.background = "rgb(59, 66, 82)"
+      pole[y-1][x-1] = 1
     }
-    
-    if(x != 0 && y != 0) {
-      item.addEventListener("click", function() {
-        if (setCol == 0) {
-          setCol = 1  
-          item.style.background = "rgb(59, 66, 82)"
-          pole[y-1][x-1] = 1
-          }
-        
-          else {
-            setCol = 0
-            item.style.background = "rgb(216, 222, 233)"
-            pole[y-1][x-1] = 0
+
+    else {
+      setCol = 0
+      item.style.background = "rgb(216, 222, 233)"
+      pole[y-1][x-1] = 0
 
             }
             console.log(pole)
@@ -137,8 +137,52 @@ function createItem(pole, znach, y, x) {
             return item;
             
             }
-      
+            
+            
+            // function countOfNeighbors(pole, x, y) {
+              //   let sum = 0;
+              
+              //   if(x == 0  && y == 0) {
+                //       sum = pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+                //       return sum;
+                //   }
+                //   else if(x == 0  && y == 9) {
+                  //       sum = pole[x+1][y] + pole[x][y-1] + pole[x+1][y-1]
+                  //       return sum;
+                  //   }
+                  //   else if(x == 9  && y == 0) {
+                    //       sum = pole[x-1][y] + pole[x][y+1] + pole[x-1][y+1]
+                    //       return sum;
+                    
+                    //   }
+                    //   else if(x == 9  && y == 9) {
+                      //       sum = pole[x-1][y] + pole[x][y-1] + pole[x-1][y-1]
+//       return sum;
+//   }
 
+//   if(x == 0) {
+  //       sum = pole[x][y-1] + pole[x+1][y-1] + pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+  //       return sum;
+  //   }
+  //   if(x == 9) {
+    //       sum = pole[x-1][y-1] + pole[x][y-1] + pole[x-1][y] + pole[x-1][y+1] + pole[x][y+1]
+    //       return sum;
+    //   }
+    //   if(y == 0) {
+      //       sum = pole[x-1][y] + pole[x+1][y] + pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
+      //       return sum;
+      //   }
+      //   if(y == 9) {
+//       sum= pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] + pole[x-1][y] + pole[x+1][y]
+//       return sum;
+//   }
+
+//   sum =  pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] +
+//             pole[x-1][y] +                  pole[x+1][y] +
+//             pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
+
+//   return sum;
+// }
 function Validate(pole)
 {
     let sum = 0
@@ -308,3 +352,12 @@ function RebootGame() {
   restart_btn.classList.remove("none")
   console.log(restart_text, restart_btn)
 }
+pole.addEventListener(click,function(){
+  if(item=1){
+    item.classList.add("hit")
+  }
+  else{
+    item.classList.add("miss")
+  }
+}
+)

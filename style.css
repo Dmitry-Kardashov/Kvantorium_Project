@@ -131,7 +131,7 @@ table {
 }
 
 .miss::after{
-    background-image:url(img/) ;
+
 }
 
 .hit, .miss {
