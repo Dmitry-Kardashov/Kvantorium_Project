@@ -230,19 +230,24 @@ function NeighborsValidate(pole, x, y) {
       RebootGame()
     }
   }
-  
-  if (pole[x+1][y] == 1 && pole[x][y+1] == 1) {
-    RebootGame()
+  if(x != 9) 
+    {
+    if (pole[x+1][y] == 1 && pole[x][y+1] == 1) {
+      RebootGame()
+    }
+    if (pole[x+1][y] == 1 && pole[x][y-1] == 1) {
+      RebootGame()
   }
-  if (pole[x+1][y] == 1 && pole[x][y-1] == 1) {
-    RebootGame()
-  }
+}
+if(x != 0) {
   if (pole[x-1][y] == 1 && pole[x][y+1] == 1) {
     RebootGame()
   }
   if (pole[x-1][y] == 1 && pole[x][y-1] == 1) {
     RebootGame()
   }
+
+}
 
 }
 
