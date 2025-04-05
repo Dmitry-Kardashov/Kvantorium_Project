@@ -139,14 +139,12 @@ table {
 }
 
 .miss::after{
+    width: 100%;
+    height: 100%;
     content: '';
     position: absolute;
-    top: 15px;
-    left: 15px;
-    width: 15px;
-    height: 15px;
     background-color: black;
-    border-radius: 100%;
+ 
 }
 
 .hit::after{
