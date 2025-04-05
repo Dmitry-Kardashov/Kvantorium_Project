@@ -1,0 +1,140 @@
+ // else {
+  //   sum = pole[x-1][y-1] + pole [x][y-1] + pole [x+1][y-1] + pole [x-1][y] + pole [x+1][y] + pole [x-1][y+1] + pole [x][y+1] + pole [x+1][y+1]
+  //   if(sum > 2) {
+  //     RebootGame()
+  //   }
+  // }
+
+//   if(pole[x+1][y] == 1 && pole[x][y+1] == 1) {
+//     console.log("Ошибка1")
+//     RebootGame()
+//   }
+//   else if(pole[x+1][y] == 1 && pole[x][y-1] == 1) {
+//     console.log("Ошибка2")
+//     RebootGame()
+//   }
+  
+//   else if(pole[x-1][y] == 1 && pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   else if(pole[x-1][y] == 1 && pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+// }
+
+// if(pole[x+1][y] == 1) {
+//   if(pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y-1] == 1) {
+//     RebootGame()
+//   }
+// }
+
+// if(pole[x-1][y] == 1) {
+//   if(pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y-1] == 1) {
+//     RebootGame()
+//   }
+// }
+
+// if(pole[x][y+1] == 1) {
+//   if(pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y-1] == 1) {
+//     RebootGame()
+//   }
+// }
+
+// if(pole[x][y-1] == 1) {
+//   if(pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y-1] == 1) {
+//     RebootGame()
+//   }
+// }
+
+// if(pole[x+1][y+1] == 1) {
+//   if(pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y-1] == 1) {
+//     RebootGame()
+//   }
+// }
+// if(pole[x+1][y-1] == 1) {
+//   if(pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y-1] == 1) {
+//     RebootGame()
+//   }
+// }
+// if(pole[x-1][y+1] == 1) {
+//   if(pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y-1] == 1) {
+//     RebootGame()
+//   }
+// }
+// if(pole[x-1][y-1] == 1) {
+//   if(pole[x][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[x][y-1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y+1] == 1) {
+//     RebootGame()
+//   }
+//   if(pole[y][y-1] == 1) {
+//     RebootGame()
+//   }
+// }

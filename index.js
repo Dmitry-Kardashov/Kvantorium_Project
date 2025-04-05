@@ -49,33 +49,16 @@ document.addEventListener("DOMContentLoaded", function() {
     
     let pole_knopka = document.querySelector(".save-button")
     pole_knopka.addEventListener("click", function() {
+      let restart_text = document.querySelector(".restart_text")
+      let restart_btn = document.querySelector(".restart_button")
+      restart_text.classList.add("none")
+      restart_btn.classList.add("none")
       Validate(pole)
     })
 
     
 }
 
-function Validate(pole){
-  let restart_text = document.querySelector(".restart_text")
-  let restart_btn = document.querySelector(".restart_button")
-  let kletki = 0
-  console.log("Начало проверки")
-  for(let i=0; i<pole.length; i++) {
-    for(let b=0; b<pole[i].length; b++) {
-      if(pole[i][b] == 1) {
-        kletki ++;
-      }
-    }
-  }
-  console.log("Количество клеток: " + kletki)
-  if(kletki != 20) {
-    console.log("Неверная растановка кораблей")
-    restart_text.classList.remove("none")
-    restart_btn.classList.remove("none")
-    console.log(restart_text, restart_btn)
-
-  }
-}
 
 function createShufflePole() {
     
@@ -88,108 +71,106 @@ function createShufflePole() {
           pole[i][b] = 0
           if(b == 0) {
             pole[i][b] = i
-          }
-          if(i == 0) {
-            pole[i][b] = b
+            }
+            if(i == 0) {
+              pole[i][b] = b
             
-          }
+              }
         }
-    }
-    return pole
-      
-} 
-
-function createHeadingRow() {
-
-  let item = document.createElement("div")
-  item.classList.add("game_item")
-
-  item.textContent = isShip
-    
-  item.addEventListener("click", function() {
-    
-  }) 
-  item.style.background = "RED"
-}
-
-function createItem(pole, znach, y, x) {
-
-    let setCol = 0
-    let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
-    // console.log(pole, znach)
-    let item = document.createElement("div")
-    item.classList.add("game_item")
-    item.classList.add("hit")
-
-    
-    if(znach != 0 ) {
-      item.textContent = znach
-      item.classList.add("item-heading")
-    }
-      
+        }
+        return pole
+        
+        } 
+        
+        function createHeadingRow() {
+          
+          let item = document.createElement("div")
+          item.classList.add("game_item")
+          item.textContent = isShip
+          
+          item.addEventListener("click", function() {
+            
+          }) 
+          item.style.background = "RED"
+          }
+          
+          function createItem(pole, znach, y, x) {
+            
+            let setCol = 0
+            let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
+            // console.log(pole, znach)
+            let item = document.createElement("div")
+            item.classList.add("game_item")
+            
+            
+            if(znach != 0 ) {
+              item.textContent = znach
+              item.classList.add("item-heading")
+              }
+              
     if(y == 0) {
       item.textContent = alphabet[x-1]
       item.classList.add("item-heading")
     }
-
+    
     if(x != 0 && y != 0) {
       item.addEventListener("click", function() {
         if (setCol == 0) {
           setCol = 1  
           item.style.background = "rgb(59, 66, 82)"
           pole[y-1][x-1] = 1
-        }
+          }
         
-        else {
-          setCol = 0
-          item.style.background = "rgb(216, 222, 233)"
-          pole[y-1][x-1] = 0
+          else {
+            setCol = 0
+            item.style.background = "rgb(216, 222, 233)"
+            pole[y-1][x-1] = 0
 
-        }
-        console.log(pole)
-      })
-    }
-
-
-return item;
-
-}
-
-
-// function countOfNeighbors(pole, x, y) {
-//   let sum = 0;
-
-//   if(x == 0  && y == 0) {
-//       sum = pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+            }
+            console.log(pole)
+            })
+            }
+            
+            
+            return item;
+            
+            }
+            
+            
+            // function countOfNeighbors(pole, x, y) {
+              //   let sum = 0;
+              
+              //   if(x == 0  && y == 0) {
+                //       sum = pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+                //       return sum;
+                //   }
+                //   else if(x == 0  && y == 9) {
+                  //       sum = pole[x+1][y] + pole[x][y-1] + pole[x+1][y-1]
+                  //       return sum;
+                  //   }
+                  //   else if(x == 9  && y == 0) {
+                    //       sum = pole[x-1][y] + pole[x][y+1] + pole[x-1][y+1]
+                    //       return sum;
+                    
+                    //   }
+                    //   else if(x == 9  && y == 9) {
+                      //       sum = pole[x-1][y] + pole[x][y-1] + pole[x-1][y-1]
 //       return sum;
 //   }
-//   else if(x == 0  && y == 9) {
-//       sum = pole[x+1][y] + pole[x][y-1] + pole[x+1][y-1]
-//       return sum;
-//   }
-//   else if(x == 9  && y == 0) {
-//       sum = pole[x-1][y] + pole[x][y+1] + pole[x-1][y+1]
-//       return sum;
 
-//   }
-//   else if(x == 9  && y == 9) {
-//       sum = pole[x-1][y] + pole[x][y-1] + pole[x-1][y-1]
-//       return sum;
-//   }
-  
 //   if(x == 0) {
-//       sum = pole[x][y-1] + pole[x+1][y-1] + pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
-//       return sum;
-//   }
-//   if(x == 9) {
-//       sum = pole[x-1][y-1] + pole[x][y-1] + pole[x-1][y] + pole[x-1][y+1] + pole[x][y+1]
-//       return sum;
-//   }
-//   if(y == 0) {
-//       sum = pole[x-1][y] + pole[x+1][y] + pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
-//       return sum;
-//   }
-//   if(y == 9) {
+  //       sum = pole[x][y-1] + pole[x+1][y-1] + pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+  //       return sum;
+  //   }
+  //   if(x == 9) {
+    //       sum = pole[x-1][y-1] + pole[x][y-1] + pole[x-1][y] + pole[x-1][y+1] + pole[x][y+1]
+    //       return sum;
+    //   }
+    //   if(y == 0) {
+      //       sum = pole[x-1][y] + pole[x+1][y] + pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
+      //       return sum;
+      //   }
+      //   if(y == 9) {
 //       sum= pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] + pole[x-1][y] + pole[x+1][y]
 //       return sum;
 //   }
@@ -197,6 +178,79 @@ return item;
 //   sum =  pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] +
 //             pole[x-1][y] +                  pole[x+1][y] +
 //             pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
- 
+
 //   return sum;
 // }
+function Validate(pole)
+{
+    let sum = 0
+    let kletki = 0
+    console.log("Начало проверки")
+    for(let i=0; i<pole.length; i++) {
+      for(let b=0; b<pole[i].length; b++) {
+        if(pole[i][b] == 1) {
+          NeighborsValidate(pole, i, b)
+          kletki ++;
+        }
+      }
+    }
+    console.log("Количество клеток: " + kletki)
+    // if(kletki != 20) {
+    //   RebootGame()
+    // }
+
+    
+}
+          
+function NeighborsValidate(pole, x, y) {
+  let sum = 0
+  console.log("Координата клетки: " + x + "-" + y)
+  if (x == 0 && y == 0) {
+    sum = pole[x+1][y] + pole[x][y+1] + pole [x+1][y+1]
+    console.log("Количество соседних клеток: " + sum)
+    if(sum > 1) {
+      RebootGame()
+    }
+  }
+  else if(x == 0 && y == 9) {
+    sum = pole[x+1][y] + pole [x][y-1] + pole [x+1][y-1]
+    if(sum > 1) {
+      RebootGame()
+    }
+  }
+  if (x == 9 && y == 0) {
+    sum = pole[x-1][y] + pole [x][y+1] + pole[x-1][y+1]
+    if(sum > 1) {
+      RebootGame()
+    }
+  }
+  else if (x == 9 && y == 9) { 
+    sum = pole[x-1][y] + pole [x][y-1] + pole [x-1][y-1]
+    if(sum > 1) {
+      RebootGame()
+    }
+  }
+  
+  if (pole[x+1][y] == 1 && pole[x][y+1] == 1) {
+    RebootGame()
+  }
+  if (pole[x+1][y] == 1 && pole[x][y-1] == 1) {
+    RebootGame()
+  }
+  if (pole[x-1][y] == 1 && pole[x][y+1] == 1) {
+    RebootGame()
+  }
+  if (pole[x-1][y] == 1 && pole[x][y-1] == 1) {
+    RebootGame()
+  }
+
+}
+
+function RebootGame() {
+  let restart_text = document.querySelector(".restart_text")
+  let restart_btn = document.querySelector(".restart_button")
+  console.log("Неверная растановка кораблей")
+  restart_text.classList.remove("none")
+  restart_btn.classList.remove("none")
+  console.log(restart_text, restart_btn)
+}
