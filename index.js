@@ -77,37 +77,37 @@ function createShufflePole() {
             
               }
         }
-    }
-    return pole
-      
-} 
-
-function createHeadingRow() {
-
-  let item = document.createElement("div")
-  item.classList.add("game_item")
-  item.textContent = isShip
-    
-  item.addEventListener("click", function() {
-    
-  }) 
-  item.style.background = "RED"
-}
-
-function createItem(pole, znach, y, x) {
-
-    let setCol = 0
-    let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
-    // console.log(pole, znach)
-    let item = document.createElement("div")
-    item.classList.add("game_item")
-
-    
-    if(znach != 0 ) {
-      item.textContent = znach
-      item.classList.add("item-heading")
-    }
-      
+        }
+        return pole
+        
+        } 
+        
+        function createHeadingRow() {
+          
+          let item = document.createElement("div")
+          item.classList.add("game_item")
+          item.textContent = isShip
+          
+          item.addEventListener("click", function() {
+            
+          }) 
+          item.style.background = "RED"
+          }
+          
+          function createItem(pole, znach, y, x) {
+            
+            let setCol = 0
+            let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
+            // console.log(pole, znach)
+            let item = document.createElement("div")
+            item.classList.add("game_item")
+            
+            
+            if(znach != 0 ) {
+              item.textContent = znach
+              item.classList.add("item-heading")
+              }
+              
     if(y == 0) {
       item.textContent = alphabet[x-1]
       item.classList.add("item-heading")
