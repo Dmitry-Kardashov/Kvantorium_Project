@@ -132,7 +132,7 @@ table {
 
 .miss::after{
     background-image:url(img/штрих.jpg) ;
-    background-size: 100%;
+    
 }
 
 .hit, .miss {
@@ -140,7 +140,7 @@ table {
 }
 
 .miss::after{
-   
+   background-size: 100%;
     content: '';
     position: absolute;
     background-color: black;
