@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // let input = document.querySelector(".input-count")
     let pole = []
+    let pole_prot = []
         let startBtn = document.querySelector(".start-game")
         let pole_text = document.querySelector(".polya")
         let pole_knopka = document.querySelector(".save-button")
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     container1.classList.add("game")
     // let pole = []
     let pole = createShufflePole()
+    let pole_prot = createShufflePole()
     console.log(pole)
 
     for(let i=0; i<pole.length; i++) {
@@ -30,10 +32,10 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
 
-    for(let i=0; i<pole.length; i++) {
-      for(let b=0; b<pole[i].length; b++) {
-        let item = createItem(pole, pole[i][b], i, b)
-        container1.append(item)
+    for(let i=0; i<pole_prot.length; i++) {
+      for(let b=0; b<pole_prot[i].length; b++) {
+        let item_prot = createItem(pole_prot, pole_prot[i][b], i, b)
+        container1.append(item_prot)
       }
     }
 
@@ -82,7 +84,7 @@ function createShufflePole() {
         
         } 
         
-        function createHeadingRow() {
+function createHeadingRow() {
           
           let item = document.createElement("div")
           item.classList.add("game_item")
@@ -94,7 +96,7 @@ function createShufflePole() {
           item.style.background = "RED"
           }
           
-          function createItem(pole, znach, y, x) {
+function createItem(pole, znach, y, x) {
             
             let setCol = 0
             let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
@@ -135,120 +137,167 @@ function createShufflePole() {
             return item;
             
             }
-            
-            
-            // function countOfNeighbors(pole, x, y) {
-              //   let sum = 0;
-              
-              //   if(x == 0  && y == 0) {
-                //       sum = pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
-                //       return sum;
-                //   }
-                //   else if(x == 0  && y == 9) {
-                  //       sum = pole[x+1][y] + pole[x][y-1] + pole[x+1][y-1]
-                  //       return sum;
-                  //   }
-                  //   else if(x == 9  && y == 0) {
-                    //       sum = pole[x-1][y] + pole[x][y+1] + pole[x-1][y+1]
-                    //       return sum;
-                    
-                    //   }
-                    //   else if(x == 9  && y == 9) {
-                      //       sum = pole[x-1][y] + pole[x][y-1] + pole[x-1][y-1]
-//       return sum;
-//   }
+      
 
-//   if(x == 0) {
-  //       sum = pole[x][y-1] + pole[x+1][y-1] + pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
-  //       return sum;
-  //   }
-  //   if(x == 9) {
-    //       sum = pole[x-1][y-1] + pole[x][y-1] + pole[x-1][y] + pole[x-1][y+1] + pole[x][y+1]
-    //       return sum;
-    //   }
-    //   if(y == 0) {
-      //       sum = pole[x-1][y] + pole[x+1][y] + pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
-      //       return sum;
-      //   }
-      //   if(y == 9) {
-//       sum= pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] + pole[x-1][y] + pole[x+1][y]
-//       return sum;
-//   }
-
-//   sum =  pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] +
-//             pole[x-1][y] +                  pole[x+1][y] +
-//             pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
-
-//   return sum;
-// }
 function Validate(pole)
 {
     let sum = 0
     let kletki = 0
-    console.log("Начало проверки")
+    // console.log("Начало проверки")
     for(let i=0; i<pole.length; i++) {
       for(let b=0; b<pole[i].length; b++) {
         if(pole[i][b] == 1) {
           NeighborsValidate(pole, i, b)
+          ShipsValidate(pole, i, b)
           kletki ++;
         }
       }
     }
-    console.log("Количество клеток: " + kletki)
-    // if(kletki != 20) {
-    //   RebootGame()
-    // }
+    // console.log("Количество клеток: " + kletki)
 
+
+    
     
 }
           
 function NeighborsValidate(pole, x, y) {
   let sum = 0
-  console.log("Координата клетки: " + x + "-" + y)
+  // console.log("Координата клетки: " + x + "-" + y)
   if (x == 0 && y == 0) {
     sum = pole[x+1][y] + pole[x][y+1] + pole [x+1][y+1]
-    console.log("Количество соседних клеток: " + sum)
+    // console.log("Количество соседних клеток: " + sum)
     if(sum > 1) {
       RebootGame()
+      return;
+    }
+    if(pole[x+1][y+1] == 1) 
+    {
+      RebootGame();
     }
   }
   else if(x == 0 && y == 9) {
     sum = pole[x+1][y] + pole [x][y-1] + pole [x+1][y-1]
     if(sum > 1) {
       RebootGame()
+      return;
+    }
+  if(pole[x+1][y-1] == 1) 
+    {
+      RebootGame();
     }
   }
   if (x == 9 && y == 0) {
     sum = pole[x-1][y] + pole [x][y+1] + pole[x-1][y+1]
     if(sum > 1) {
       RebootGame()
+      return;
+    }
+  if(pole[x-1][y+1] == 1) 
+    {
+      RebootGame();
     }
   }
   else if (x == 9 && y == 9) { 
     sum = pole[x-1][y] + pole [x][y-1] + pole [x-1][y-1]
     if(sum > 1) {
       RebootGame()
+      return;
     }
+    if(pole[x-1][y-1] == 1) 
+      {
+        RebootGame();
+      }
   }
   if(x != 9) 
-    {
+  {
     if (pole[x+1][y] == 1 && pole[x][y+1] == 1) {
       RebootGame()
+      return;
     }
     if (pole[x+1][y] == 1 && pole[x][y-1] == 1) {
       RebootGame()
-  }
+      return;
+    }
 }
-if(x != 0) {
+if(x != 0) 
+{
   if (pole[x-1][y] == 1 && pole[x][y+1] == 1) {
     RebootGame()
+    return;
   }
   if (pole[x-1][y] == 1 && pole[x][y-1] == 1) {
     RebootGame()
+    return;
   }
+}
+let sumUgl = 0;
+for(let i=-1; i<2; i+=2) {
+  for(let b=-1; b<2; b+=2) {
+      if(x+i > 9 || x+i < 0 || y+b > 9 || y+b < 0) {
+        continue;
+      }
+      if(pole[x+i][y+b] == 1) {
+        sumUgl += 1;
+      }
+  }
+}
+
+if(sumUgl > 0) {
+  RebootGame();
+}
+// if(pole[x+1][y+1] == 1 || pole[x-1][y-1] == 1 || pole[x-1][y+1] == 1 || pole[x+1][y-1] == 1) {}
+else {
+}  return 1;
+  
+}
+
+function ShipsValidate(pole, x, y) {
+  // Определяем ориентацию корабля: гей или лезби
+  for(let i=0; i<pole.length; i++) {
+    for(let b=0; b<pole[0].length; b++) {
+      if(pole[i][b] == 1) {
+        let dlina = 1;
+        let count = 1;
+        while (pole[i][b+count] == 1) {
+          dlina += 1;
+          count += 1;
+        }
+        if(pole[i][b-1] == 1) {
+          continue;
+        }
+        console.log("Корабль: " + i + " " + b)
+        console.log("Длина: " + dlina)  
+      } 
+
+        // && pole[i][b+1] == 1) {
+    }
+  }
+  // if(pole[x+1][y] == 1 || pole[x-1][y] == 1) {
+  //   VerticalShipAdd(pole, x, y)
+  // }
+  // if(pole[x][y+1] == 1 || pole[x][y-1] == 1) {
+  //   HorizontalShipAdd(pole, x, y)
+  // }
+}
+
+function HorizontalShipAdd(pole, x, y) {
+  let ShipLength = 0
+  console.log("Ориентация корабля горизонтальная")
+  for(t = -3; t<=3; t++)
+    {
+      if(pole[x+t][y] == 1) 
+      {
+        ShipLength += 1
+      }
+    }
+  
+
+  console.log(ShipLength)
 
 }
 
+function VerticalShipAdd(pole, x, y) {
+  console.log("Ориентация корабля вертикальная")
 }
 
 function RebootGame() {
