@@ -129,12 +129,38 @@ table {
 .none {
     display: none;
 }
-.kill ::after{
-    content:❌ ;
-}
+
 .miss::after{
     background-image:url(img/) ;
 }
+
+.hit, .miss {
+    position: relative;
+}
+
+.miss::after{
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    border-radius: 100%;
+}
+
 .hit::after{
-    content: 🔴 ;
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 100%;
+}
+
+.kill::after{
+    content: '❌';
+    top: 0;
 }
