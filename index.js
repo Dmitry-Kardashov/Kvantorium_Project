@@ -93,6 +93,7 @@ function createHeadingRow() {
   
   item.addEventListener("click", function() {
     
+
   }) 
   item.style.background = "RED"
 }
@@ -104,6 +105,20 @@ function createItem(pole, znach, y, x) {
   // console.log(pole, znach)
   let item = document.createElement("div")
   item.classList.add("game_item")
+
+    if(x != 0 && y != 0) {
+      item.addEventListener("click", function() {
+        if (setCol == 0) {
+          setCol = 1  
+          item.style.background = "rgb(255, 255, 255)"
+          pole[y-1][x-1] = 1
+          }
+        
+          else {
+            setCol = 0
+            item.style.background = "transparent"
+            pole[y-1][x-1] = 0
+
 
 
   if(znach != 0 ) {

@@ -10,11 +10,19 @@ div {
     margin: 0 auto;
 }
 
+
+body  {
+  font-family: "Jura", sans-serif;
+  font-optical-sizing: 11px;
+  font-weight: 900;
+  font-style: normal;
+}
+
 .game_item {
     width:  45px ;
     height: 45px;
-    border: 1.4px solid rgb(94, 129, 172)
-
+    border: 1.4px solid rgb(255, 255, 255)
+    
 }
 
 .none {
@@ -22,7 +30,10 @@ div {
 }
     
 body {
-    background-color: #d8dee9;
+    /* background-color: black; */
+    background-image: url(tm.jpg);
+    background-size: 100%;
+    
 }
 
 
@@ -32,6 +43,7 @@ body {
     justify-content: center;
     text-align: center;
     border: 1.4px solid transparent;
+    color: white;
 }
 
 
@@ -107,12 +119,16 @@ table {
 .pole-text {
     font-size: 20px;
     padding-left: 20px;
+    color: white;
 }
 
 
 .restart_text {
-    font-size: 30px;
-    color: red;
+    font-size: 40px;
+    font-family: "Rubik Wet Paint", system-ui;
+  font-weight: 500;
+  font-style: normal;
+    color: rgb(185, 14, 14);
     text-align: center;
 }
 
