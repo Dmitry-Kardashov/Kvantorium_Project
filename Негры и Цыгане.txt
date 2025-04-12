@@ -187,3 +187,67 @@
 
 //   return sum;
 // }
+
+
+            // function countOfNeighbors(pole, x, y) {
+              //   let sum = 0;
+              
+              //   if(x == 0  && y == 0) {
+                //       sum = pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+                //       return sum;
+                //   }
+                //   else if(x == 0  && y == 9) {
+                  //       sum = pole[x+1][y] + pole[x][y-1] + pole[x+1][y-1]
+                  //       return sum;
+                  //   }
+                  //   else if(x == 9  && y == 0) {
+                    //       sum = pole[x-1][y] + pole[x][y+1] + pole[x-1][y+1]
+                    //       return sum;
+                    
+                    //   }
+                    //   else if(x == 9  && y == 9) {
+                      //       sum = pole[x-1][y] + pole[x][y-1] + pole[x-1][y-1]
+//       return sum;
+//   }
+
+//   if(x == 0) {
+  //       sum = pole[x][y-1] + pole[x+1][y-1] + pole[x+1][y] + pole[x][y+1] + pole[x+1][y+1]
+  //       return sum;
+  //   }
+  //   if(x == 9) {
+    //       sum = pole[x-1][y-1] + pole[x][y-1] + pole[x-1][y] + pole[x-1][y+1] + pole[x][y+1]
+    //       return sum;
+    //   }
+    //   if(y == 0) {
+      //       sum = pole[x-1][y] + pole[x+1][y] + pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
+      //       return sum;
+      //   }
+      //   if(y == 9) {
+//       sum= pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] + pole[x-1][y] + pole[x+1][y]
+//       return sum;
+//   }
+
+//   sum =  pole[x-1][y-1] + pole[x][y-1] + pole[x+1][y-1] +
+//             pole[x-1][y] +                  pole[x+1][y] +
+//             pole[x-1][y+1] + pole[x][y+1] + pole[x+1][y+1]
+
+//   return sum;
+// }
+
+
+
+function HorizontalShipAdd(pole, x, y) {
+  let ShipLength = 0
+  console.log("Ориентация корабля горизонтальная")
+  for(t = -3; t<=3; t++)
+    {
+      if(pole[x+t][y] == 1) 
+      {
+        ShipLength += 1
+      }
+    }
+  
+
+  console.log(ShipLength)
+
+}
