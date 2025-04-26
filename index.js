@@ -130,7 +130,7 @@ if(x != 0 && y != 0) {
     pole[y-1][x-1] = 0
 
   }
-  console.log(pole)
+  // console.log(pole)
   })
   }
 
@@ -144,7 +144,7 @@ function Validate(pole, ships)
 {
   let sum = 0
   let kletki = 0
-  console.log("Начало проверки")
+  // console.log("Начало проверки")
   for(let i=0; i<pole.length; i++) {
     for(let b=0; b<pole[i].length; b++) {
       if(pole[i][b] == 1) {
@@ -154,9 +154,9 @@ function Validate(pole, ships)
     }
   }
   ShipsValidate(pole, ships)
-  console.log("Проверка закончена")
-  console.log("Количество клеток: " + kletki)
-  console.log(ships)
+  // console.log("Проверка закончена")
+  // console.log("Количество клеток: " + kletki)
+  // console.log(ships)
 
 }
         
@@ -261,14 +261,15 @@ let ships_count = 0
 for(let i=0; i<validatePole.length; i++) {
   for(let b=0; b<validatePole[0].length; b++) {
     // console.log(pole[i][b])
+   
     if(validatePole[i][b] == 1) {
-      // validatePole[i][b] = 2
       let dlina = 1;
       let count = 1;
       let obj = {}
-      if(b != 9) {
-        if(validatePole[i][b+count] == 1) {
-            while (validatePole[i][b+count] == 1) {
+      // validatePole[i][b] = 2
+      
+        if(b != 9 && validatePole[i][b+count] == 1) {
+          while (validatePole[i][b+count] == 1) {
               // validatePole[i][b+count] = 2
             dlina += 1;
             count += 1;
@@ -288,13 +289,9 @@ for(let i=0; i<validatePole.length; i++) {
           obj.dlina = dlina
           obj.x = b
           obj.y = i
-        console.log("Корабль: " + i + " " + b + " " + "Длина: " + dlina)
-        console.log(obj)
         // console.log("Длина: " + dlina) 
         }
-      }
-      if(i != 9) {
-        if(validatePole[i+count][b] == 1) {
+        if(i != 9 && validatePole[i+count][b] == 1) {
           while (validatePole[i+count][b] == 1) {
             // validatePole[i+count][b] = 2
               dlina += 1;
@@ -303,22 +300,96 @@ for(let i=0; i<validatePole.length; i++) {
               if(i+count > 9) {
                 break;
               }
-            }
+          }
              
           if(i != 0) {
-          if(validatePole[i-1][b] == 1) {
-            continue;
-          }
-        }
-        ships[ships_count].korda_x = i
-        ships[ships_count].korda_y = b
-        ships[ships_count].size = dlina
-        ships_count += 1
-        console.log("Корабль: " + i + " " + b + " " + "Длина: " + dlina)
-        }
-      }
-    
+            if(validatePole[i-1][b] == 1) {
+              continue;
+            }
 
+            obj.dlina = dlina
+            obj.x = b
+            obj.y = i
+          }
+       
+        }
+
+    if( 9 > i && i > 0 && 9> b && b > 0) {
+      if(validatePole[i+1][b] == 0 && validatePole[i][b+1] == 0 && validatePole[i-1][b] == 0 && validatePole[i][b-1] == 0) {
+          obj.dlina = dlina
+          obj.x = b
+          obj.y = i
+      }
+    }
+// ВОТ СЮДА
+    if(i == 0) {
+      if(b == 0) {
+        if(validatePole[i][b+1] == 0 && validatePole [i+1][b] == 0) {
+          obj.dlina = dlina
+          obj.x = b
+          obj.y = i
+        }  
+      }
+      else if(b == 9) {
+        if(validatePole[i][b-1] == 0 && validatePole [i+1][b] == 0) {
+          obj.dlina = dlina
+          obj.x = b
+          obj.y = i
+        }  
+      }
+      else {
+        if(validatePole[i+1][b] == 0 && validatePole [i][b+1] == 0 && validatePole [i][b-1] == 0) {
+          obj.dlina = dlina
+          obj.x = b
+          obj.y = i
+        }  
+      }
+    }
+
+    if(i == 9) {
+      if(b == 0) {
+        if(validatePole[i][b+1] == 0 && validatePole [i-1][b] == 0) {
+          obj.dlina = dlina
+          obj.x = b
+          obj.y = i
+        }  
+      }
+      else if(b == 9) {
+        if(validatePole[i][b-1] == 0 && validatePole [i-1][b] == 0) {
+          obj.dlina = dlina
+          obj.x = b
+          obj.y = i
+        }  
+      }
+      else {
+        if(validatePole[i-1][b] == 0 && validatePole [i][b+1] == 0 && validatePole [i][b-1] == 0) {
+          obj.dlina = dlina
+          obj.x = b
+          obj.y = i
+        }  
+      }
+    }
+        
+    
+    if( b == 0 && i != 0 && i != 9) {
+      if(validatePole[i+1][b] == 0 && validatePole [i][b+1] == 0 && validatePole [i-1][b] == 0) {
+        obj.dlina = dlina
+        obj.x = b
+        obj.y = i
+      }  
+    }
+    else if (b == 9 && i != 0 && i != 9) {
+      if(validatePole[i-1][b] == 0 && validatePole [i+1][b] == 0 && validatePole [i][b-1] == 0) {
+        obj.dlina = dlina
+        obj.x = b
+        obj.y = i
+      } 
+    }
+    
+    
+    console.log(obj)
+
+    }
   }
 }
 }
@@ -337,7 +408,6 @@ for(let i=0; i<validatePole.length; i++) {
 // console.log(x, y)
 
 // console.log(dlina)
-}
 
 
 
@@ -360,3 +430,4 @@ console.log(restart_text, restart_btn)
 //   }
 // }
 // )
+
