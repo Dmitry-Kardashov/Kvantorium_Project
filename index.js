@@ -360,3 +360,12 @@ console.log(restart_text, restart_btn)
 //   }
 // }
 // )
+function ship(){
+  if(dlina=1){
+    
+  }
+
+  )
+
+}
+
