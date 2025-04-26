@@ -1,3 +1,13 @@
+
+let array = [
+  {
+    item:game_item,
+    x : x,
+    y : y
+  }
+
+]
+
 document.addEventListener("DOMContentLoaded", function() {
   // let input = document.querySelector(".input-count")
   let pole = []
@@ -360,12 +370,24 @@ console.log(restart_text, restart_btn)
 //   }
 // }
 // )
-function ship(){
-  if(dlina=1){
-    
-  }
 
-  )
 
-}
+
+
+
+
+
+
+
+
+
+// let array = [
+//   {
+//     item:game_item,
+//     x : x,
+//     y : y
+//   }
+
+// ]
+// let arrayCell=array.find(el =>el.x     item.x && el.y   item.y)
 

@@ -251,3 +251,127 @@ function HorizontalShipAdd(pole, x, y) {
   console.log(ShipLength)
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+function NeighborsValidate(pole, x, y) {
+let sum = 0
+console.log("Координата клетки: " + x + "-" + y)
+if (x == 0 && y == 0) {
+  sum = pole[x+1][y] + pole[x][y+1] + pole [x+1][y+1]
+  // console.log("Количество соседних клеток: " + sum)
+  if(sum > 1) {
+    RebootGame()
+    return;
+  }
+  if(pole[x+1][y+1] == 1) 
+  {
+    RebootGame();
+  }
+}
+else if(x == 0 && y == 9) {
+  sum = pole[x+1][y] + pole [x][y-1] + pole [x+1][y-1]
+  if(sum > 1) {
+    RebootGame()
+    return;
+  }
+if(pole[x+1][y-1] == 1) 
+  {
+    RebootGame();
+  }
+}
+if (x == 9 && y == 0) {
+  sum = pole[x-1][y] + pole [x][y+1] + pole[x-1][y+1]
+  if(sum > 1) {
+    RebootGame()
+    return;
+  }
+if(pole[x-1][y+1] == 1) 
+  {
+    RebootGame();
+  }
+}
+else if (x == 9 && y == 9) { 
+  sum = pole[x-1][y] + pole [x][y-1] + pole [x-1][y-1]
+  if(sum > 1) {
+    RebootGame()
+    return;
+  }
+  if(pole[x-1][y-1] == 1) 
+    {
+      RebootGame();
+    }
+}
+if(x != 9) 
+{
+  if (pole[x+1][y] == 1 && pole[x][y+1] == 1) {
+    RebootGame()
+    return;
+  }
+  if (pole[x+1][y] == 1 && pole[x][y-1] == 1) {
+    RebootGame()
+    return;
+  }
+}
+if(x != 0) 
+{
+if (pole[x-1][y] == 1 && pole[x][y+1] == 1) {
+  RebootGame()
+  return;
+}
+if (pole[x-1][y] == 1 && pole[x][y-1] == 1) {
+  RebootGame()
+  return;
+}
+}
+let sumUgl = 0;
+for(let i=-1; i<2; i+=2) {
+for(let b=-1; b<2; b+=2) {
+    if(x+i > 9 || x+i < 0 || y+b > 9 || y+b < 0) {
+      continue;
+    }
+    if(pole[x+i][y+b] == 1) {
+      sumUgl += 1;
+    }
+}
+}
+
+if(sumUgl > 0) {
+RebootGame();
+}
+// if(pole[x+1][y+1] == 1 || pole[x-1][y-1] == 1 || pole[x-1][y+1] == 1 || pole[x+1][y-1] == 1) {}
+else {
+}  return 1;
+
+}
+
+
