@@ -31,8 +31,8 @@ body  {
     
 body {
     /* background-color: black; */
-    background-image: url(tm.jpg);
-    background-size: 100%;
+    /* background-image: url(tm.jpg);
+    background-size: 100%; */
     
 }
 
@@ -69,6 +69,11 @@ table {
    }
 
 .start-game {
+    width: 100px;
+    height: 50px;
+    position: relative;
+    margin-top: 22%;
+    left: 45%;
     border: none;
     border-radius: 10px;
     text-decoration: none;
@@ -179,4 +184,34 @@ table {
 .kill::after{
     content: '❌';
     top: 0;
+}
+.back{
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    
+}
+.oneship{
+    background-size:cover ;
+    background:no-repeat center center fixed;
+    background-image:url(img/1.png) ; 
+    max-width: 45px;
+    z-index: 4;
+}
+.twoship{
+    background-image:url(img/2.png);
+    background-size:cover ;
+    background:center ;
+    /* background:no-repeat center center fixed; */
+    max-width: 45px;
+    
+}
+.threeship{
+    background-image: url(img/3.png);
+    max-width: 45px;
+}
+.fourship{
+    background-image:url(img/4.png) ;
+    max-width: 45px;
 }
