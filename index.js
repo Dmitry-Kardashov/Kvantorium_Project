@@ -1,12 +1,12 @@
 
-let array = [
-  {
-    item:game_item,
-    x : x,
-    y : y
-  }
+// let array = [
+//   {
+//     item:game_item,
+//     x : x,
+//     y : y
+//   }
 
-]
+// ]
 
 document.addEventListener("DOMContentLoaded", function() {
   // let input = document.querySelector(".input-count")
@@ -31,10 +31,9 @@ function startGame() {
   let container1 = document.createElement("div")
   container1.classList.add("game")
   let ships = []
-  // let pole = []
   let pole = createShufflePole()
   let pole_prot = createShufflePole()
-  console.log(pole)
+  // console.log(pole)
 
   for(let i=0; i<pole.length; i++) {
     for(let b=0; b<pole[i].length; b++) {
@@ -58,7 +57,7 @@ function startGame() {
   pole.splice(0, 1)
   pole.forEach(el => el.splice(0, 1))
   
-  console.log(pole)
+  // console.log(pole)
   
   let pole_knopka = document.querySelector(".save-button")
   pole_knopka.addEventListener("click", function() {
@@ -110,7 +109,8 @@ item.style.background = "RED"
 function createItem(pole, znach, y, x) {
           
 let setCol = 0
-let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
+// let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
+let alphabet = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 // console.log(pole, znach)
 let item = document.createElement("div")
 item.classList.add("game_item")
@@ -126,6 +126,8 @@ if(y == 0) {
   item.classList.add("item-heading")
 }
 
+
+
 if(x != 0 && y != 0) {
   item.addEventListener("click", function() {
   if (setCol == 0) {
@@ -140,7 +142,7 @@ if(x != 0 && y != 0) {
     pole[y-1][x-1] = 0
 
   }
-  console.log(pole)
+  // console.log(pole)
   })
   }
 
@@ -152,9 +154,11 @@ return item;
           
 function Validate(pole, ships)
 {
+  let ValidateShips = []
+  let ShipsCount
   let sum = 0
   let kletki = 0
-  console.log("Начало проверки")
+  // console.log("Начало проверки")
   for(let i=0; i<pole.length; i++) {
     for(let b=0; b<pole[i].length; b++) {
       if(pole[i][b] == 1) {
@@ -163,11 +167,10 @@ function Validate(pole, ships)
         }
     }
   }
-  ShipsValidate(pole, ships)
-  console.log("Проверка закончена")
+  ShipsValidate(pole, ValidateShips, ShipsCount)
+  // console.log("Проверка закончена")
   console.log("Количество клеток: " + kletki)
-  console.log(ships)
-
+  // console.log(ValidateShips)
 }
         
 function NeighborsValidate(pole, x, y) {
@@ -261,52 +264,24 @@ else {
 
 }
 
-function ShipsValidate(pole, ships) {
-let validatePole = [...pole]
-// ships.korda_x = 1
-// ships.korda_y = 2
-// console.log(ships)
-let ships_count = 0
+function ShipsValidate(pole, ValidateShips, ShipsCount) {
 
+let validatePole = [...pole]
+// console.log("Validate")
 for(let i=0; i<validatePole.length; i++) {
   for(let b=0; b<validatePole[0].length; b++) {
-    // console.log(pole[i][b])
     if(validatePole[i][b] == 1) {
-      // validatePole[i][b] = 2
+      // console.log("i = " + i)
+      // console.log("b = " + b)
       let dlina = 1;
       let count = 1;
       let obj = {}
-      if(b != 9) {
-        if(validatePole[i][b+count] == 1) {
-            while (validatePole[i][b+count] == 1) {
-              // validatePole[i][b+count] = 2
-            dlina += 1;
-            count += 1;
-            
-            if(b+count > 9) {
-              break;
-            }
+     
 
-          }
-          if(b != 0) {
-            if(validatePole[i][b-1] == 1) {
-              continue;
-            }
-          }
-          ships_count += 1
 
-          obj.dlina = dlina
-          obj.x = b
-          obj.y = i
-        console.log("Корабль: " + i + " " + b + " " + "Длина: " + dlina)
-        console.log(obj)
-        // console.log("Длина: " + dlina) 
-        }
-      }
       if(i != 9) {
         if(validatePole[i+count][b] == 1) {
           while (validatePole[i+count][b] == 1) {
-            // validatePole[i+count][b] = 2
               dlina += 1;
               count += 1;
 
@@ -320,36 +295,51 @@ for(let i=0; i<validatePole.length; i++) {
             continue;
           }
         }
-        ships[ships_count].korda_x = i
-        ships[ships_count].korda_y = b
-        ships[ships_count].size = dlina
-        ships_count += 1
-        console.log("Корабль: " + i + " " + b + " " + "Длина: " + dlina)
+        obj.dlina = dlina
+        obj.x = b
+        obj.y = i
+        // console.log("Корабль: " + i + " " + b + " " + "Длина: " + dlina)
+        console.log(obj)
+        ValidateShips[ShipsCount] += obj
+        ShipsCount += 1
         }
       }
-    
 
+    
+     if(b != 9) {
+        if(validatePole[i][b+count] == 1) {
+            while (validatePole[i][b+count] == 1) {
+            dlina += 1;
+            count += 1;
+            
+            if(b+count > 9) {
+              break;
+            }
+
+          }
+          if(b != 0) {
+            if(validatePole[i][b-1] == 1) {
+              continue;
+            }
+          }
+
+          obj.dlina = dlina
+          obj.x = b
+          obj.y = i
+        // console.log("Корабль: " + i + " " + b + " " + "Длина: " + dlina)
+        console.log(obj)
+        ValidateShips[ShipsCount] += obj
+        ShipsCount += 1
+        }
+      }
+        
+      }
+    }
+
+    
+     
   }
 }
-}
-// let dlina = 1;
-// let count = 1;
-
-// if(pole[y][x+1] == 1) {
-//   dlina += 1;
-//   x += 1;
-//   while(pole[y][x+1] == 1) {
-//     dlina += 1;
-//     x += 1; 
-//   }
-// }
-
-// console.log(x, y)
-
-// console.log(dlina)
-}
-
-
 
 function RebootGame() {
 let restart_text = document.querySelector(".restart_text")
@@ -370,13 +360,6 @@ console.log(restart_text, restart_btn)
 //   }
 // }
 // )
-
-
-
-
-
-
-
 
 
 
