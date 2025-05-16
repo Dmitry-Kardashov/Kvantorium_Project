@@ -2,13 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css"> -->
     <link rel="stylesheet" href="style.css">
+
+     <!-- <style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+    </style> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script> -->
+    <!-- <script>
+    $( function() {
+      $( "#ship1" ).draggable();
+    } );
+    $(function () {
+        $("#ship2").draggable()
+    })
+    $(function () {
+        $("#ship3").draggable()
+    })
+    $(function () {
+        $("#ship4").draggable()
+    })
+    </script> -->
+   
     <title>Document</title>
 </head>
 <body>
     <button class="start-game">Начать</button>
-    <button class="save-button">Сохранить</button>
+<!-- 
     <table>
         <tr>
             <td>Корабли</td>
@@ -35,30 +60,45 @@
             <td>4</td>
             <td><button>Добавить</button></td>
         </tr>
-    </table>
+    </table> -->
 
-    <button class="btn">
-        adsflkadsjf
+<div id="ship1">
+ <img src="img/одинокий коробль.png" alt="">
+</div>
+ 
 
-    </button>
-    <button class="btn">
-        adsflkadsjf
+<div id="ship2">
+    <img src="img/двунокий коробль.png" alt="">      
+</div>
 
-    </button>
-    <button class="btn">
-        adsflkadsjf
 
-    </button>
-    <button class="btn">
-        adsflkadsjf
+ <div id="ship3">
+    <img src="img/тренокий коробль.png" alt="">
+ </div>
 
-    </button>
-    <button class="btn">
-        adsflkadsjf
 
-    </button>
+ <div id="ship4">
+ <img src="img/четырехнокий коробль.png" alt="">
+ </div>
+
+
+
 
 
     <script src="index.js"></script>
+    <section class="game">
+        
+    </section>
+    <div class="container" style="display: flex; justify-content: space-between;">
+    </div>
+    <div class="polya none">
+        <p class="pole-text">Ваше поле</p>
+        <p class="pole-text">Поле противника</p>
+    </div>
+
+<button class="save-button none">Подтвердить расстановку кораблей</button>
+<p class="restart_text none">Корабли расставлены неправильно!</p>
+<button class="restart_button none">Перезапустить</button>
+
 </body>
 </html>
