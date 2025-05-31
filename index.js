@@ -1,14 +1,6 @@
-
-// let array = [
-//   {
-//     item:game_item,
-//     x : x,
-//     y : y
-//   }
-
-// ]
 const controller = new AbortController();
 let arrayCells = [];
+let arrayCellsEnemy = [];
 let id;
 
 async function initializationGame(array) {
@@ -39,10 +31,9 @@ async function attackEnemy(id, x, y) {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  // let input = document.querySelector(".input-count")
   let pole = []
   let pole_prot = []
-  let startBtn = document.querySelector(".start-game")
+  let startBtn = document.querySelector(".start-game") 
   let pole_text = document.querySelector(".polya")
   let pole_knopka = document.querySelector(".save-button")
   startBtn.addEventListener("click", function() {
@@ -61,21 +52,31 @@ function startGame() {
   let container1 = document.createElement("div")
   container1.classList.add("game")
   let ships = []
-  // let pole = []
   let pole = createShufflePole()
   let pole_prot = createShufflePole()
 
   for(let i=0; i<pole.length; i++) {
     for(let b=0; b<pole[i].length; b++) {
-      let item = createItem(pole, pole[i][b], i, b)
-      arrayCells.push(item)
+      let item = createItem(pole, pole[i][b], i, b, "my")
+      arrayCells.push(
+        {
+          item:item,
+          x:b,
+          y:i
+        })
       container.append(item)
     }
   }
 
   for(let i=0; i<pole_prot.length; i++) {
     for(let b=0; b<pole_prot[i].length; b++) {
-      let item_prot = createItem(pole_prot, pole_prot[i][b], i, b)
+      let item_prot = createItem(pole_prot, pole_prot[i][b], i, b, "prot")
+      arrayCellsEnemy.push(
+        {
+          item:item_prot,
+          x:b,
+          y:i
+        })
       container1.append(item_prot)
     }
   }
@@ -91,13 +92,13 @@ function startGame() {
   
   let pole_knopka = document.querySelector(".save-button")
   pole_knopka.addEventListener("click", function() {
-    let restart_text = document.querySelector(".restart_text")
-    let restart_btn = document.querySelector(".restart_button")
-    let save_button = document.querySelector(".save-button")
-    restart_text.classList.add("none")
-    restart_btn.classList.add("none")
-    save_button.classList.add("none")
-    Validate(pole)
+  let restart_text = document.querySelector(".restart_text")
+  let restart_btn = document.querySelector(".restart_button")
+  let save_button = document.querySelector(".save-button")
+  restart_text.classList.add("none")
+  restart_btn.classList.add("none")
+  save_button.classList.add("none")
+  Validate(pole)
   })
 
   
@@ -126,26 +127,19 @@ return pole
       
 } 
       
-function createHeadingRow() {
-          
+function createHeadingRow() {   
   let item = document.createElement("div")
   item.classList.add("game_item")
   item.textContent = isShip
-
-  item.addEventListener("click", function() {
-    
-  }) 
   item.style.background = "RED"
 }
         
-function createItem(pole, znach, y, x) {
-            
+function createItem(pole, znach, y, x, type) {     
   let setCol = 0
   // let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
   let alphabet = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   let item = document.createElement("div")
   item.classList.add("game_item")
-
 
   if(znach != 0 ) {
     item.textContent = znach
@@ -158,31 +152,27 @@ function createItem(pole, znach, y, x) {
   }
 
   if(x != 0 && y != 0) {
-    
-    item.addEventListener("click", function() {
-    if (setCol == 0) {
-      setCol = 1  
-      item.style.background = "rgb(59, 66, 82)"
-      pole[y-1][x-1] = 1
+    if(type == "my") {
+
+      item.addEventListener("click", function() {
+      if (setCol == 0) {
+        setCol = 1  
+        item.style.background = "rgb(59, 66, 82)"
+        pole[y-1][x-1] = 1
+      }
+  
+      else {
+        setCol = 0
+        item.style.background = "transparent"
+        pole[y-1][x-1] = 0
+  
+      }}, { signal: controller.signal })
     }
-
-    else {
-      setCol = 0
-      item.style.background = "transparent"
-      pole[y-1][x-1] = 0
-
-    }}, { signal: controller.signal })
   }
-
 
   return item;
 
 }
-
-function changeColor() {
-
-}
-          
           
 function Validate(pole)
 {
