@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+     <!-- <style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+    </style> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script> -->
+    <!-- <script>
+    $( function() {
+      $( "#ship1" ).draggable();
+    } );
+    $(function () {
+        $("#ship2").draggable()
+    })
+    $(function () {
+        $("#ship3").draggable()
+    })
+    $(function () {
+        $("#ship4").draggable()
+    })
+    </script> -->
+   
+    <title>Document</title>
+</head>
+<body>
+    <!-- <img class="back" src="http://127.0.0.1:5500/tm.jpg" alt=""> -->
+     
+    <button class="start-game">Начать</button>
+<!-- 
+    <table>
+        <tr>
+            <td>Корабли</td>
+            <td>Количество</td>
+            <td>Добавление</td>
+        </tr>
+        <tr>
+            <td>4х-палубные</td>
+            <td>1</td>
+            <td><button>Добавить</button></td>
+        </tr>
+        <tr>
+            <td>3х-палубные</td>
+            <td>2</td>
+            <td><button>Добавить</button></td>
+        </tr>
+        <tr>
+            <td>2х-палубные</td>
+            <td>3</td>
+            <td><button>Добавить</button></td>
+        </tr>
+        <tr>
+            <td>1-палубные</td>
+            <td>4</td>
+            <td><button>Добавить</button></td>
+        </tr>
+    </table> -->
+
+<div id="ship1">
+ <img src="img/одинокий коробль.png" alt="">
+</div>
+ 
+
+<div id="ship2">
+    <img src="img/двунокий коробль.png" alt="">      
+</div>
+
+
+ <div id="ship3">
+    <img src="img/тренокий коробль.png" alt="">
+ </div>
+
+
+ <div id="ship4">
+ <img src="img/четырехнокий коробль.png" alt="">
+ </div>
+
+
+
+
+
+    <script src="index.js"></script>
+    <section class="game">
+        
+    </section>
+    <div class="container" style="display: flex; justify-content: space-between;">
+    </div>
+    <div class="polya none">
+        <p class="pole-text">Ваше поле</p>
+        <p class="pole-text">Поле противника</p>
+    </div>
+
+<button class="save-button none">Подтвердить расстановку кораблей</button>
+<p class="restart_text none">Корабли расставлены неправильно!</p>
+<button class="restart_button none">Перезапустить</button>
+<div class="twoship"></div>
+</body>
+</html>
