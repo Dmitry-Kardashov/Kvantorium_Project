@@ -9,20 +9,20 @@
 // ]
 const controller = new AbortController();
 let arrayCells = [];
+let arrayCellsProtivnika = [];
 let id;
+let test = [];
 
 async function initializationGame(array) {
-    let response = await fetch('http://localhost:3001/api/games', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({ 
-        "ships":  array 
-      })
-    });
-    let res = await response.json()
-    id = res.gameId
+  let response = await fetch('http://localhost:3001/api/games', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(array)
+  });
+  let res = await response.json()
+  id = res.gameId
 }
 
 async function attackEnemy(id, x, y) {
@@ -77,6 +77,7 @@ function startGame() {
     for(let b=0; b<pole_prot[i].length; b++) {
       let item_prot = createItem(pole_prot, pole_prot[i][b], i, b)
       container1.append(item_prot)
+      
     }
   }
 
@@ -98,6 +99,7 @@ function startGame() {
     restart_btn.classList.add("none")
     save_button.classList.add("none")
     Validate(pole)
+    console.log(pole)
   })
 
   
@@ -484,7 +486,12 @@ function ValidateAllShips(ships) {
 
   controller.abort();
 
-  initializationGame(ships)
+  initializationGame(ships);
+
+  console.log(arrayCellsProtivnika)
+
+  arrayCellsProtivnika.forEach(item => {
+    console.log(item)
+  })
 
 }
-
