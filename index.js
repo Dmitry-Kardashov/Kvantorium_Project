@@ -17,15 +17,16 @@ async function initializationGame(array) {
 }
 
 async function attackEnemy(id, x, y) {
-  let response1 = await fetch("http://localhost:3001/api/games/" + id, {
+  let response1 = await fetch(`http://localhost:3001/api/games/${id}/attacks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify({x: x, y: y})
+      body: JSON.stringify({x: x-1, y: y-1})
   })
 
-  let res = await response.json()
+  let res = await response1.json()
+  console.log(res)
 }
 
 
@@ -70,12 +71,12 @@ function startGame() {
   for(let i=0; i<pole_prot.length; i++) {
     for(let b=0; b<pole_prot[i].length; b++) {
       let item_prot = createItem(pole_prot, pole_prot[i][b], i, b, "prot")
-      arrayCellsEnemy.push(
-        {
-          item:item_prot,
-          x:b,
-          y:i
-        })
+      // arrayCellsEnemy.push(
+      //   {
+      //     item:item_prot,
+      //     x:b,
+      //     y:i
+      //   })
       container1.append(item_prot)
       
     }
@@ -167,6 +168,16 @@ function createItem(pole, znach, y, x, type) {
         pole[y-1][x-1] = 0
   
       }}, { signal: controller.signal })
+    }
+    else {
+      arrayCellsEnemy.push({
+          item: item,
+          x: x,
+          y: y,
+      })
+      item.addEventListener("click", function() {
+          attackEnemy(id, x, y)
+      })
     }
   }
 
@@ -475,11 +486,4 @@ function ValidateAllShips(ships) {
   controller.abort();
 
   initializationGame(ships);
-
-  console.log(arrayCellsProtivnika)
-
-  arrayCellsProtivnika.forEach(item => {
-    console.log(item)
-  })
-
 }
