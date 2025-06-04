@@ -3,6 +3,8 @@ let arrayCells = [];
 let arrayCellsEnemy = [];
 let id;
 let test = [];
+let ItemPos
+let ItemPosBot
 
 async function initializationGame(array) {
   let response = await fetch('http://localhost:3001/api/games', {
@@ -23,10 +25,30 @@ async function attackEnemy(id, x, y) {
         'Content-Type': 'application/json;charset=utf-8'
       },
       body: JSON.stringify({x: x-1, y: y-1})
-  })
-
+    })
+    
   let res = await response1.json()
+  PrintMiss(x, y)
   console.log(res)
+  if(res.hit == true) {
+    PrintHit(res)
+  }
+  if(res.botAttack.hit == true) {
+    PrintHitBot(res)
+  }
+  else {
+    PrintMissBot(res)
+  }
+
+  if(gameOver = true) {
+    if(this.winner == "bot")
+    {
+      alert("Игра завершена. Победил бот");
+    }
+    else if(this.winner == "player") {
+      alert("Игра завершена. Вы выйграли!");
+    }
+  }
 }
 
 
@@ -46,34 +68,29 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     
     
-function startGame() {
-  let container = document.createElement("div")
-  container.classList.add("game")
-  let container1 = document.createElement("div")
-  container1.classList.add("game")
-  let ships = []
-  let pole = createShufflePole()
-  let pole_prot = createShufflePole()
+    function startGame() {
+      let container = document.createElement("div")
+      container.classList.add("game")
+      let container1 = document.createElement("div")
+      container1.classList.add("game")
+      let ships = []
+      let pole = createShufflePole()
+      let pole_prot = createShufflePole()
 
-  for(let i=0; i<pole.length; i++) {
-    for(let b=0; b<pole[i].length; b++) {
+      for(let i=0; i<pole.length; i++) {
+        for(let b=0; b<pole[i].length; b++) {
       let item = createItem(pole, pole[i][b], i, b, "my")
-      arrayCells.push(
-        {
-          item:item,
-          x:b,
-          y:i
-        })
+
       container.append(item)
     }
   }
-
+  
   for(let i=0; i<pole_prot.length; i++) {
     for(let b=0; b<pole_prot[i].length; b++) {
       let item_prot = createItem(pole_prot, pole_prot[i][b], i, b, "prot")
       // arrayCellsEnemy.push(
-      //   {
-      //     item:item_prot,
+        //   {
+          //     item:item_prot,
       //     x:b,
       //     y:i
       //   })
@@ -81,7 +98,7 @@ function startGame() {
       
     }
   }
-
+  
   
   let container2 = document.querySelector(".container")
   container2.append(container)
@@ -101,17 +118,17 @@ function startGame() {
     save_button.classList.add("none")
     Validate(pole)
   })
-
+  
   
 }
 
 
 function createShufflePole() {
   
-let pole = []
-// I - высота
-// B - ширина
-for(let i=0; i< 11; i++) {
+  let pole = []
+  // I - высота
+  // B - ширина
+  for(let i=0; i< 11; i++) {
     pole.push(new Array())
     for(let b=0; b<11; b++) {
       pole[i][b] = 0
@@ -120,14 +137,47 @@ for(let i=0; i< 11; i++) {
       }
       if(i == 0) {
         pole[i][b] = b
-          
+        
       }
     }
 }
 return pole
-      
+
 } 
-      
+
+
+function PrintMissBot(res) {
+  console.log(res.botAttack.x)
+  console.log(res.botAttack.y)
+  ItemPos = res.botAttack.y * 10 + res.botAttack.x
+  arrayCells[ItemPos].item.classList.add("hit")
+  console.log(ItemPos)
+}
+
+function PrintHitBot(res) {
+  console.log(res.botAttack.x)
+  console.log(res.botAttack.y)
+  ItemPos = res.botAttack.y * 10 + res.botAttack.x
+  arrayCells[ItemPos].item.classList.remove("hit")
+  arrayCells[ItemPos].item.classList.add("kill")
+  console.log(ItemPos)
+}
+
+
+function PrintMiss(x, y) {
+  
+  console.log(arrayCellsEnemy)
+  ItemPos = y * 10 - 10 + x
+  arrayCellsEnemy[ItemPos-1].item.classList.add("miss")
+}
+
+function PrintHit(res) {
+  arrayCellsEnemy[ItemPos-1].item.classList.remove("miss")
+  arrayCellsEnemy[ItemPos-1].item.classList.add("kill")
+}
+
+
+
 function createHeadingRow() {   
   let item = document.createElement("div")
   item.classList.add("game_item")
@@ -154,7 +204,12 @@ function createItem(pole, znach, y, x, type) {
 
   if(x != 0 && y != 0) {
     if(type == "my") {
-
+          arrayCells.push(
+        {
+          item:item,
+          x:x,
+          y:y
+        })
       item.addEventListener("click", function() {
       if (setCol == 0) {
         setCol = 1  

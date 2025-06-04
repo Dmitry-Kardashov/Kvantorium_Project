@@ -190,7 +190,12 @@ table {
 
 .kill::after{
     content: '❌';
-    top: 0;
+    /* top: 0; */
+     position: absolute;
+    width: 45px;
+    height: 45px;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 .back{
     z-index: -1;
