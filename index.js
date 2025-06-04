@@ -40,12 +40,12 @@ async function attackEnemy(id, x, y) {
     PrintMissBot(res)
   }
 
-  if(gameOver = true) {
-    if(this.winner == "bot")
+  if(res.botAttack.gameOver == true) {
+    if(res.botAttack.winner == "bot")
     {
       alert("Игра завершена. Победил бот");
     }
-    else if(this.winner == "player") {
+    else if(res.gamebotAttackOver.winner == "player") {
       alert("Игра завершена. Вы выйграли!");
     }
   }
@@ -149,7 +149,7 @@ return pole
 function PrintMissBot(res) {
   console.log(res.botAttack.x)
   console.log(res.botAttack.y)
-  ItemPos = res.botAttack.y * 10 + res.botAttack.x
+  ItemPos = (res.botAttack.y) * 10 + res.botAttack.x
   arrayCells[ItemPos].item.classList.add("hit")
   console.log(ItemPos)
 }
@@ -157,9 +157,9 @@ function PrintMissBot(res) {
 function PrintHitBot(res) {
   console.log(res.botAttack.x)
   console.log(res.botAttack.y)
-  ItemPos = res.botAttack.y * 10 + res.botAttack.x
+  ItemPos = (res.botAttack.y) * 10 + res.botAttack.x
   arrayCells[ItemPos].item.classList.remove("hit")
-  arrayCells[ItemPos].item.classList.add("kill")
+  // arrayCells[ItemPos].item.classList.add("kill")
   console.log(ItemPos)
 }
 
