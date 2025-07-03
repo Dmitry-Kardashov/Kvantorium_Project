@@ -213,7 +213,7 @@ function createItem(pole, znach, y, x, type) {
       item.addEventListener("click", function() {
       if (setCol == 0) {
         setCol = 1  
-        item.style.background = "rgb(59, 66, 82)"
+        item.style.background = "rgb(229, 233, 240)"
         pole[y-1][x-1] = 1
       }
   

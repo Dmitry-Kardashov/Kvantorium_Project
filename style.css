@@ -2,9 +2,18 @@ div {
     cursor: inherit;
 }
 
+h1 {
+    text-align: center;
+    font-size: 60px;
+      font-family: "Rubik Mono One", monospace;
+  font-weight: 400;
+  font-style: normal;
+  color: #e5e9f0;
+}
+
 body {
     margin: 0;
-    background-image: url("tm.jpg");
+    background-image: url("Fon_New.jpg");
     background-size: cover;
     padding-bottom: 20px;
 }
@@ -28,7 +37,7 @@ body  {
 .game_item {
     width:  45px ;
     height: 45px;
-    border: 1.4px solid rgb(255, 255, 255)
+    border: 1.4px solid #c8cbcf
     
 }
 
@@ -76,21 +85,22 @@ table {
    }
 
 .start-game {
-    width: 100px;
-    height: 50px;
+    width: 165px;
+    height: 80px;
+    font-size: 20px;
     position: relative;
-    margin-top: 22%;
+    margin-top: 16%;
     left: 45%;
     border: none;
     border-radius: 10px;
     text-decoration: none;
-    color: #d8dee9;
-    background: #3b4252;
+    color: #3B4244;
+    background: #d8dee9;
     box-shadow: 0 5px 0 #3b4252;
 }
 
 .start-game:hover {
-    background: #3b4252;
+    background: #eceff4;
     box-shadow: none;
     position: relative;
     top: 2px;
@@ -114,13 +124,20 @@ table {
 
 .save-button {
     border-radius: 10px;
-    color: #d8dee9;
-    background: #4c566a;
-    width: 210px;
-    height: 50px;
-    font-size: 15px;
+    color: #2e3440;
+    background: #d8dee9;
+    width: 230px;
+    height: 62px;
+    font-size: 17px;
     display: block;
     margin: 0 auto;
+}
+
+.save-button:hover {
+    background: #eceff4;
+    box-shadow: none;
+    position: relative;
+    top: 2px;
 }
 
 .polya {
