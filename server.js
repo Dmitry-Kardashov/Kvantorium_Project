@@ -99,7 +99,7 @@ class Game {
   }
 
   // Размещение корабля с защитой от выхода за границы
-  placeShip(board, x, y, size, horizontal) {
+  placeShip(board, y, x, size, horizontal) {
     for (let i = 0; i < size; i++) {
       if (horizontal) {
         if (y + i < 10) {
@@ -211,6 +211,14 @@ class Game {
     }
     return true;
   }
+
+  // get botBoard() {
+  //   return this.botBoard
+  // }
+
+  // set botBoard(botBoard) {
+  //   this.botBoard = botBoard
+  // }
 }
 
 // Создание новой игры без валидации пользовательских кораблей
@@ -228,6 +236,7 @@ app.post('/api/games', (req, res) => {
 
     res.status(201).json({
       gameId: game.id,
+      pole_prot: game.botBoard,
       message: "Игра успешно создана! Корабли игрока размещены без валидации."
     });
 

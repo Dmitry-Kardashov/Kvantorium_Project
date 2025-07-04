@@ -1,6 +1,8 @@
 const controller = new AbortController();
 let arrayCells = [];
 let arrayCellsEnemy = [];
+let pole = []
+let pole_prot = []
 let id;
 let test = [];
 let ItemPos
@@ -16,6 +18,8 @@ async function initializationGame(array) {
   });
   let res = await response.json()
   id = res.gameId
+  pole_prot = res.pole_prot
+  console.log(res)
 }
 
 async function attackEnemy(id, x, y) {
@@ -28,10 +32,12 @@ async function attackEnemy(id, x, y) {
     })
     
   let res = await response1.json()
-  PrintMiss(x, y)
   console.log(res)
   if(res.hit == true) {
-    PrintHit(res)
+    PrintHit(x, y)
+  }
+  else {
+    PrintMiss(x, y)
   }
   if(res.botAttack.hit == true) {
     PrintHitBot(res)
@@ -53,8 +59,6 @@ async function attackEnemy(id, x, y) {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  let pole = []
-  let pole_prot = []
   let startBtn = document.querySelector(".start-game") 
   let pole_text = document.querySelector(".polya")
   let pole_knopka = document.querySelector(".save-button")
@@ -74,8 +78,8 @@ document.addEventListener("DOMContentLoaded", function() {
       let container1 = document.createElement("div")
       container1.classList.add("game")
       let ships = []
-      let pole = createShufflePole()
-      let pole_prot = createShufflePole()
+      pole = createShufflePole()
+      pole_prot = createShufflePole()
 
       for(let i=0; i<pole.length; i++) {
         for(let b=0; b<pole[i].length; b++) {
@@ -106,6 +110,9 @@ document.addEventListener("DOMContentLoaded", function() {
   
   pole.splice(0, 1)
   pole.forEach(el => el.splice(0, 1))
+
+  pole_prot.splice(0, 1)
+  pole_prot.forEach(el => el.splice(0, 1))
   
   
   let pole_knopka = document.querySelector(".save-button")
@@ -147,32 +154,32 @@ return pole
 
 
 function PrintMissBot(res) {
-  console.log(res.botAttack.x)
-  console.log(res.botAttack.y)
+  console.log(res.botAttack.x + " x")
+  console.log(res.botAttack.y + " y")
   ItemPos = (res.botAttack.y) * 10 + res.botAttack.x
   arrayCells[ItemPos].item.classList.add("hit")
   console.log(ItemPos)
 }
 
 function PrintHitBot(res) {
-  console.log(res.botAttack.x)
-  console.log(res.botAttack.y)
+  console.log(res.botAttack.x + " x")
+  console.log(res.botAttack.y + " y")
   ItemPos = (res.botAttack.y) * 10 + res.botAttack.x
-  arrayCells[ItemPos].item.classList.remove("hit")
-  // arrayCells[ItemPos].item.classList.add("kill")
+  // arrayCells[ItemPos].item.classList.remove("hit")
+  arrayCells[ItemPos].item.classList.add("kill")
   console.log(ItemPos)
 }
 
 
 function PrintMiss(x, y) {
   
-  console.log(arrayCellsEnemy)
+  // console.log(arrayCellsEnemy)
   ItemPos = y * 10 - 10 + x
   arrayCellsEnemy[ItemPos-1].item.classList.add("miss")
 }
 
-function PrintHit(res) {
-  arrayCellsEnemy[ItemPos-1].item.classList.remove("miss")
+function PrintHit(x, y) {
+  ItemPos = y * 10 - 10 + x
   arrayCellsEnemy[ItemPos-1].item.classList.add("kill")
 }
 
@@ -539,6 +546,7 @@ function ValidateAllShips(ships) {
   } 
 
   controller.abort();
-
+  console.log(ships)
+  console.log(pole, pole_prot)
   initializationGame(ships);
 }
