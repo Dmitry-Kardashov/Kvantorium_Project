@@ -9,13 +9,17 @@ let ItemPos
 let ItemPosBot
 
 async function initializationGame(array) {
-  let response = await fetch('http://146.158.127.131:3001//api/games', {
+  console.log(array)
+  let response = await fetch('http://localhost:3001/game', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     },
-    body: JSON.stringify(array)
+    body: JSON.stringify({
+      playerField: array
+    })
   });
+
   let res = await response.json()
   id = res.gameId
   pole_prot = res.pole_prot
@@ -23,7 +27,9 @@ async function initializationGame(array) {
 }
 
 async function attackEnemy(id, x, y) {
-  let response1 = await fetch(`http://146.158.127.131:3001/api/games/${id}/attacks`, {
+
+
+  let response1 = await fetch(`http://localhost:3001/game/${id}/attacks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -33,28 +39,28 @@ async function attackEnemy(id, x, y) {
     
   let res = await response1.json()
   console.log(res)
-  if(res.hit == true) {
-    PrintHit(x, y)
-  }
-  else {
-    PrintMiss(x, y)
-  }
-  if(res.botAttack.hit == true) {
-    PrintHitBot(res)
-  }
-  else {
-    PrintMissBot(res)
-  }
+  if(res.playerResult.hit == true) {
+      console.log("попал")
+      PrintHit(x, y)
+    }
+    else {
+      console.log("не попал")
+      PrintMiss(x, y)
+    }
+    if(res.computerResult.hit == true) {
+      PrintHitBot(res)
+    }
+    else {
+      PrintMissBot(res)
+    }
 
-  if(res.botAttack.gameOver == true) {
-    if(res.botAttack.winner == "bot")
-    {
+  if(res.gameOver.computerWins == true) {
       alert("Игра завершена. Победил бот");
-    }
-    else if(res.gamebotAttackOver.winner == "player") {
-      alert("Игра завершена. Вы выйграли!");
-    }
   }
+  else if(res.gameOver.playerWins == true) {
+      alert("Игра завершена. Вы выиграли!");
+  }
+  
 }
 
 
@@ -72,32 +78,25 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     
     
-    function startGame() {
-      let container = document.createElement("div")
-      container.classList.add("game")
-      let container1 = document.createElement("div")
-      container1.classList.add("game")
-      let ships = []
-      pole = createShufflePole()
-      pole_prot = createShufflePole()
+  function startGame() {
+    let container = document.createElement("div")
+    container.classList.add("game")
+    let container1 = document.createElement("div")
+    container1.classList.add("game")
+    let ships = []
+    pole = createShufflePole()
+    pole_prot = createShufflePole()
 
-      for(let i=0; i<pole.length; i++) {
-        for(let b=0; b<pole[i].length; b++) {
-      let item = createItem(pole, pole[i][b], i, b, "my")
-
-      container.append(item)
+    for(let i=0; i<pole.length; i++) {
+      for(let b=0; b<pole[i].length; b++) {
+        let item = createItem(pole, pole[i][b], i, b, "my")
+        container.append(item)
+      }
     }
-  }
   
   for(let i=0; i<pole_prot.length; i++) {
     for(let b=0; b<pole_prot[i].length; b++) {
       let item_prot = createItem(pole_prot, pole_prot[i][b], i, b, "prot")
-      // arrayCellsEnemy.push(
-        //   {
-          //     item:item_prot,
-      //     x:b,
-      //     y:i
-      //   })
       container1.append(item_prot)
       
     }
@@ -154,20 +153,13 @@ return pole
 
 
 function PrintMissBot(res) {
-  console.log(res.botAttack.x + " x")
-  console.log(res.botAttack.y + " y")
-  ItemPos = (res.botAttack.y) * 10 + res.botAttack.x
-  arrayCells[ItemPos].item.classList.add("hit")
-  console.log(ItemPos)
+  ItemPosBot = (res.computerResult.y) * 10 + res.computerResult.x
+  arrayCells[ItemPosBot].item.classList.add("hit")
 }
 
 function PrintHitBot(res) {
-  console.log(res.botAttack.x + " x")
-  console.log(res.botAttack.y + " y")
-  ItemPos = (res.botAttack.y) * 10 + res.botAttack.x
-  // arrayCells[ItemPos].item.classList.remove("hit")
-  arrayCells[ItemPos].item.classList.add("kill")
-  console.log(ItemPos)
+  ItemPosBot = (res.computerResult.y) * 10 + res.computerResult.x
+  arrayCells[ItemPosBot].item.classList.add("kill")
 }
 
 
@@ -194,8 +186,8 @@ function createHeadingRow() {
         
 function createItem(pole, znach, y, x, type) {     
   let setCol = 0
-  // let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
-  let alphabet = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+  let alphabet = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"]
+  // let alphabet = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   let item = document.createElement("div")
   item.classList.add("game_item")
 
@@ -350,75 +342,45 @@ for(let b=-1; b<2; b+=2) {
 if(sumUgl > 0) {
   RebootGame();
 }
-// if(pole[x+1][y+1] == 1 || pole[x-1][y-1] == 1 || pole[x-1][y+1] == 1 || pole[x+1][y-1] == 1) {}
 else {
 }  return 1;
 
 }
 
 function ShipsValidate(pole) {
-let validatePole = [...pole]
-ships = []
-// ships.korda_x = 1
-// ships.korda_y = 2
-let ships_count = 0
+  const validatePole = pole.map(row => [...row]); // Глубокая копия
+  ships = [];
+  let ships_count = 0;
 
-for(let i=0; i<validatePole.length; i++) {
-  for(let b=0; b<validatePole[0].length; b++) {
-    if(validatePole[i][b] == 1) {
-      let dlina = 1;
-      let count = 1;
-      let rotation = null;
-      let obj = {}
-      SingleShipsValidate(i, b, validatePole, ships, ships_count, obj, count, rotation)
-      if(SingleShipsValidate == 1) {
-        continue;
-      }
-   
-      if(i != 9) {
-        if(validatePole[i+count][b] == 1) {
-          while (validatePole[i+count][b] == 1) {
-              dlina += 1;
-              count += 1;
-              if(i+count > 9) {
-                break;
-              }
-            }
-              
-          if(i != 0) {
-          if(validatePole[i-1][b] == 1) {
-            continue;
-          }
-        }
-        rotation = "vertical"
-        AddShip(i, b, dlina, obj, ships, ships_count, count, rotation)
-        continue;
-        }
-      }
-      if(b != 9) {
-        if(validatePole[i][b+count] == 1) {
-          while (validatePole[i][b+count] == 1) {
-            dlina += 1;
-            count += 1;
-            
-            if(b+count > 9) {
-              break;
-            }
-          }
+  for (let y = 0; y < validatePole.length; y++) {
+    for (let x = 0; x < validatePole[0].length; x++) {
+      if (validatePole[y][x] === 1) {
+        const ship = { dlina: 0, x, y, rotation: null };
+        // Проверка направления корабля
+        const horizontal = (x < 9 && validatePole[y][x + 1] === 1);
+        const vertical = (y < 9 && validatePole[y + 1][x] === 1);
 
-          if(b != 0) {
-            if(validatePole[i][b-1] == 1) {
-              continue;
-            }
+        if (horizontal) {
+          ship.rotation = 'horizontal';
+          while (x + ship.dlina < 10 && validatePole[y][x + ship.dlina] === 1) {
+            validatePole[y][x + ship.dlina] = 0; // Пометить как обработанную
+            ship.dlina++;
           }
-          rotation = "horizontal"
-          AddShip(i, b, dlina, obj, ships, ships_count, count, rotation)
-          continue;
+        } else if (vertical) {
+          ship.rotation = 'vertical';
+          while (y + ship.dlina < 10 && validatePole[y + ship.dlina][x] === 1) {
+            validatePole[y + ship.dlina][x] = 0; // Пометить как обработанную
+            ship.dlina++;
+          }
+        } else {
+          ship.dlina = 1; // Однопалубный
+          validatePole[y][x] = 0;
         }
+        ships.push(ship);
+        ships_count++;
       }
+    }
   }
-}
-}
 }
 
 function SingleShipsValidate(i, b, validatePole, ships, ships_count, obj, count, rotation) {
@@ -548,5 +510,5 @@ function ValidateAllShips(ships) {
   controller.abort();
   console.log(ships)
   console.log(pole, pole_prot)
-  initializationGame(ships);
+  initializationGame(pole);
 }
