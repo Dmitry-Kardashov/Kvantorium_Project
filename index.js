@@ -9,7 +9,7 @@ let ItemPos
 let ItemPosBot
 
 async function initializationGame(array) {
-  let response = await fetch('http://localhost:3001/api/games', {
+  let response = await fetch('http://146.158.127.131:3001//api/games', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -23,7 +23,7 @@ async function initializationGame(array) {
 }
 
 async function attackEnemy(id, x, y) {
-  let response1 = await fetch(`http://localhost:3001/api/games/${id}/attacks`, {
+  let response1 = await fetch(`http://146.158.127.131:3001/api/games/${id}/attacks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
